@@ -1,0 +1,39 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.CourseAdvizor" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/blue_200</item>
+        <item name="colorPrimaryVariant">@color/blue_500</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/green_200</item>
+        <item name="colorSecondaryVariant">@color/green_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="CustomToolBar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorControlNormal">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="CustomAuthButton">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_marginBottom">@dimen/dimen_lg</item>
+        <item name="android:paddingRight">@dimen/dimen_xl</item>
+        <item name="android:paddingLeft">@dimen/dimen_xl</item>
+        <item name="android:paddingTop">@dimen/dimen_md</item>
+        <item name="android:paddingBottom">@dimen/dimen_md</item>
+        <item name="cornerRadius">@dimen/dimen_md</item>
+    </style>
+
+    <style name="CustomFormButton">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:paddingRight">@dimen/dimen_md</item>
+        <item name="android:paddingLeft">@dimen/dimen_md</item>
+        <item name="android:paddingTop">@dimen/dimen_md</item>
+        <item name="android:paddingBottom">@dimen/dimen_md</item>
+        <item name="cornerRadius">@dimen/dimen_md</item>
+    </style>
+</resources>

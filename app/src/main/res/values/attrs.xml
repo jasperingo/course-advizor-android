@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomFormButtonLayout">
+        <attr name="android:text" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomEditTextLayout">
+        <attr name="android:hint" />
+        <attr name="android:inputType" />
+        <attr name="android:maxLength" />
+        <attr name="android:autofillHints" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomSpinnerLayout">
+        <attr name="android:hint" />
+    </declare-styleable>
+</resources>

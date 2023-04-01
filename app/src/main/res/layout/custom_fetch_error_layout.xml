@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="@dimen/dimen_lg">
+
+    <TextView
+        android:id="@id/custom_fetch_error_layout_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/colorOnSurface"
+        android:layout_marginBottom="@dimen/dimen_md"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@id/custom_fetch_error_layout_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/retry"
+        android:textAllCaps="false"
+        android:textColor="?attr/colorPrimary"
+        android:backgroundTint="?attr/colorSurface"
+        app:cornerRadius="@dimen/dimen_md"
+        />
+
+</LinearLayout>

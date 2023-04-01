@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="@dimen/dimen_md">
+
+    <TextView
+        android:id="@id/custom_edit_text_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/colorOnSurface"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/dimen_xs"
+        android:labelFor="@id/custom_edit_text_input"
+        tools:text="@string/app_name" />
+
+    <EditText
+        android:id="@id/custom_edit_text_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:autofillHints="name"
+        android:inputType="textAutoComplete"
+        android:paddingHorizontal="@dimen/dimen_md"
+        android:background="@drawable/input_background"/>
+
+    <TextView
+        android:id="@id/custom_edit_text_layout_error_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="?attr/colorError"
+        tools:text="@string/app_name" />
+
+</LinearLayout>

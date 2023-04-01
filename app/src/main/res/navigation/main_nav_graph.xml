@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/main_nav_graph"
+    app:startDestination="@id/navDashboardFragment">
+
+    <activity
+        android:id="@id/navAuthActivity"
+        android:name="com.jasperanelechukwu.android.courseadvizor.ui.AuthActivity"
+        android:label="activity_auth"
+        tools:layout="@layout/activity_auth"
+        />
+
+    <fragment
+        android:id="@id/navDashboardFragment"
+        android:name="com.jasperanelechukwu.android.courseadvizor.ui.fragments.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_navDashboardFragment_to_navAuthActivity"
+            app:destination="@id/navAuthActivity" />
+    </fragment>
+
+</navigation>

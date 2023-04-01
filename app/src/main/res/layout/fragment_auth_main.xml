@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.fragments.AuthMainFragment">
+
+    <data>
+        <variable
+            name="fragment"
+            type="com.jasperanelechukwu.android.courseadvizor.ui.fragments.AuthMainFragment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/auth_background">
+
+        <TextView
+            android:id="@id/auth_main_heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/course_advizor"
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="@dimen/dimen_text_xl"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/dimen_lg"
+            app:layout_constraintBottom_toTopOf="@id/auth_main_description"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@id/auth_main_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_description"
+            android:textAlignment="center"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/dimen_text_lg"
+            android:layout_marginBottom="@dimen/dimen_lg"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/auth_main_heading"
+            app:layout_constraintBottom_toTopOf="@id/auth_main_sign_in_button"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/CustomAuthButton"
+            android:id="@id/auth_main_sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_in"
+            android:onClick="@{fragment::onSignInButtonClicked}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/auth_main_description"
+            app:layout_constraintBottom_toTopOf="@id/auth_main_sign_up_button"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/CustomAuthButton"
+            android:id="@id/auth_main_sign_up_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_up"
+            android:onClick="@{fragment::onSignUpButtonClicked}"
+            android:textColor="?attr/colorPrimary"
+            android:backgroundTint="?attr/colorSurface"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/auth_main_sign_in_button" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

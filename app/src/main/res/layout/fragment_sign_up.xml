@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.fragments.SignUpFragment">
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.jasperanelechukwu.android.courseadvizor.viewmodels.SignUpViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:theme="@style/CustomToolBar"
+            android:id="@id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            app:navigationOnClickListener="@{() -> viewModel.doNavigateBack()}"
+            app:title="@string/sign_up"
+            app:titleTextColor="?attr/colorOnPrimary"
+            app:navigationIcon="?attr/homeAsUpIndicator"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/dimen_lg"
+                android:visibility="@{viewModel.departmentsAndSessionsUiState.loaded ? View.VISIBLE : View.GONE}">
+
+                <com.jasperanelechukwu.android.courseadvizor.ui.customviews.CustomEditTextLayout
+                    android:id="@id/first_name_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_md"
+                    android:error="@{viewModel.signUpUiState.firstNameError}"
+                    android:hint="@string/first_name"
+                    android:enabled="@{!viewModel.signUpUiState.loading}"
+                    android:textChangedListener="@{viewModel::setFirstName}"
+                    app:layout_constraintBottom_toTopOf="@id/last_name_edit_text"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.jasperanelechukwu.android.courseadvizor.ui.customviews.CustomEditTextLayout
+                    android:id="@id/last_name_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_md"
+                    android:error="@{viewModel.signUpUiState.lastNameError}"
+                    android:hint="@string/last_name"
+                    android:enabled="@{!viewModel.signUpUiState.loading}"
+                    android:textChangedListener="@{viewModel::setLastName}"
+                    app:layout_constraintBottom_toTopOf="@id/phone_number_edit_text"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/first_name_edit_text" />
+
+                <com.jasperanelechukwu.android.courseadvizor.ui.customviews.CustomEditTextLayout
+                    android:id="@id/phone_number_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_md"
+                    android:autofillHints="phone"
+                    android:error="@{viewModel.signUpUiState.phoneNumberError}"
+                    android:hint="@string/phone_number"
+                    android:inputType="phone"
+                    android:enabled="@{!viewModel.signUpUiState.loading}"
+                    android:textChangedListener="@{viewModel::setPhoneNumber}"
+                    app:layout_constraintBottom_toTopOf="@id/pin_edit_text"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/last_name_edit_text" />
+
+                <com.jasperanelechukwu.android.courseadvizor.ui.customviews.CustomEditTextLayout
+                    android:id="@id/pin_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_md"
+                    android:autofillHints="password"
+                    android:error="@{viewModel.signUpUiState.pinError}"
+                    android:hint="@string/pin"
+                    android:inputType="numberPassword"
+                    android:maxLength="4"
+                    android:enabled="@{!viewModel.signUpUiState.loading}"
+                    android:textChangedListener="@{viewModel::setPin}"
+                    app:layout_constraintBottom_toTopOf="@id/session_spinner"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/phone_number_edit_text" />
+
+                <com.jasperanelechukwu.android.courseadvizor.ui.customviews.CustomSpinnerLayout
+                    android:id="@id/session_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_md"
+                    android:error="@{viewModel.signUpUiState.sessionError}"
+                    android:hint="@string/session"
+                    android:enabled="@{!viewModel.signUpUiState.loading}"
+                    android:itemSelectedListener="@{viewModel::setSession}"
+                    android:options="@{viewModel.departmentsAndSessionsUiState.sessions}"
+                    app:layout_constraintBottom_toTopOf="@id/department_spinner"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/pin_edit_text" />
+
+                <com.jasperanelechukwu.android.courseadvizor.ui.customviews.CustomSpinnerLayout
+                    android:id="@id/department_spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_md"
+                    android:error="@{viewModel.signUpUiState.departmentError}"
+                    android:hint="@string/department"
+                    android:enabled="@{!viewModel.signUpUiState.loading}"
+                    android:itemSelectedListener="@{viewModel::setDepartment}"
+                    android:options="@{viewModel.departmentsAndSessionsUiState.departments}"
+                    app:layout_constraintBottom_toTopOf="@id/sign_up_button"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/session_spinner" />
+
+                <com.jasperanelechukwu.android.courseadvizor.ui.customviews.CustomFormButtonLayout
+                    android:id="@id/sign_up_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dimen_md"
+                    android:loading="@{viewModel.signUpUiState.loading}"
+                    android:onClick="@{()-> viewModel.signUp()}"
+                    android:text="@string/sign_up"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/department_spinner" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+        <com.jasperanelechukwu.android.courseadvizor.ui.customviews.CustomFetchErrorLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:errorText="@{viewModel.departmentsAndSessionsUiState.error}"
+            android:retryClickListener="@{() -> viewModel.fetchDepartmentsAndSessions()}"
+            android:visibility="@{viewModel.departmentsAndSessionsUiState.error != null ? View.VISIBLE : View.GONE}"
+        />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="@dimen/dimen_md"
+            android:visibility="@{viewModel.departmentsAndSessionsUiState.loading ? View.VISIBLE : View.GONE}"
+            />
+
+    </LinearLayout>
+</layout>

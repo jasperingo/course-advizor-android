@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Nav destination ids -->
+    <item type="id" name="navDashboardFragment" />
+    <item type="id" name="navAuthMainFragment" />
+    <item type="id" name="navSignUpFragment" />
+    <item type="id" name="navSignInFragment" />
+    <item type="id" name="navAuthActivity" />
+    <item type="id" name="navMainActivity" />
+
+    <!-- Nav ids -->
+    <item type="id" name="auth_nav_graph" />
+    <item type="id" name="main_nav_graph" />
+
+    <!-- View ids -->
+    <item type="id" name="tool_bar" />
+    <item type="id" name="main_nav_host_fragment" />
+    <item type="id" name="auth_nav_host_fragment" />
+    <item type="id" name="auth_main_heading" />
+    <item type="id" name="auth_main_description" />
+    <item type="id" name="sign_up_button" />
+    <item type="id" name="auth_main_sign_up_button" />
+    <item type="id" name="sign_in_button" />
+    <item type="id" name="auth_main_sign_in_button" />
+    <item type="id" name="custom_edit_text_layout" />
+    <item type="id" name="custom_edit_text_input" />
+    <item type="id" name="custom_edit_text_text_view" />
+    <item type="id" name="custom_edit_text_layout_error_text_view" />
+    <item type="id" name="custom_spinner_input" />
+    <item type="id" name="custom_spinner_text_view" />
+    <item type="id" name="custom_spinner_layout_error_text_view" />
+    <item type="id" name="custom_fetch_error_layout_text_view" />
+    <item type="id" name="custom_fetch_error_layout_button" />
+    <item type="id" name="custom_form_button_layout_button" />
+    <item type="id" name="custom_form_button_layout_progress_bar" />
+
+    <item type="id" name="first_name_edit_text" />
+    <item type="id" name="last_name_edit_text" />
+    <item type="id" name="phone_number_edit_text" />
+    <item type="id" name="pin_edit_text" />
+    <item type="id" name="session_spinner" />
+    <item type="id" name="department_spinner" />
+
+</resources>

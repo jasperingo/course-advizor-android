@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@id/auth_nav_graph"
+    app:startDestination="@id/navAuthMainFragment">
+
+    <action android:id="@+id/action_global_mainActivity"
+        app:destination="@id/navMainActivity" />
+
+    <activity
+        android:id="@id/navMainActivity"
+        android:name="com.jasperanelechukwu.android.courseadvizor.ui.MainActivity"
+        android:label="activity_auth"
+        tools:layout="@layout/activity_main" />
+
+    <fragment
+        android:id="@id/navAuthMainFragment"
+        android:name="com.jasperanelechukwu.android.courseadvizor.ui.fragments.AuthMainFragment"
+        android:label="fragment_auth_main"
+        tools:layout="@layout/fragment_auth_main" >
+        <action
+            android:id="@+id/action_navAuthMainFragment_to_navSignUpFragment"
+            app:destination="@id/navSignUpFragment" />
+        <action
+            android:id="@+id/action_navAuthMainFragment_to_navSignInFragment"
+            app:destination="@id/navSignInFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@id/navSignUpFragment"
+        android:name="com.jasperanelechukwu.android.courseadvizor.ui.fragments.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" />
+
+    <fragment
+        android:id="@id/navSignInFragment"
+        android:name="com.jasperanelechukwu.android.courseadvizor.ui.fragments.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" />
+
+</navigation>
