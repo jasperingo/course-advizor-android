@@ -1,9 +1,9 @@
-package com.jasperanelechukwu.android.courseadvizor.entities.webservice;
+package com.jasperanelechukwu.android.courseadvizor.entities.remote;
 
 import lombok.Data;
 
 @Data
-public class WebServiceDto<T> {
+public class ResponseDto<T> {
     private String status;
 
     private String message;

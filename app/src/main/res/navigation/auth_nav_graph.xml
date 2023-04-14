@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@id/auth_nav_graph"
     app:startDestination="@id/navAuthMainFragment">
 
-    <action android:id="@+id/action_global_mainActivity"
+    <action
+        android:id="@+id/action_global_mainActivity"
         app:destination="@id/navMainActivity" />
 
     <activity

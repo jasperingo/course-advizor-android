@@ -1,14 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     tools:context=".ui.fragments.SignInFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.jasperanelechukwu.android.courseadvizor.viewmodels.SignInViewModel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:orientation="vertical">
 
-</FrameLayout>
+        <androidx.appcompat.widget.Toolbar
+            style="@style/CustomToolBar"
+            android:theme="@style/CustomToolBarTheme"
+            android:id="@id/tool_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="@string/sign_in"
+            app:navigationOnClickListener="@{() -> viewModel.doNavigateBack()}" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="@dimen/dimen_lg">
+
+            <com.jasperanelechukwu.android.courseadvizor.ui.customviews.CustomEditTextLayout
+                android:id="@id/phone_number_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_md"
+                android:autofillHints="phone"
+                android:hint="@string/phone_number"
+                android:inputType="phone"
+                android:error="@{viewModel.signInUiState.phoneNumberError}"
+                android:enabled="@{!viewModel.signInUiState.loading}"
+                android:textChangedListener="@{viewModel::setPhoneNumber}"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintBottom_toTopOf="@id/pin_edit_text"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.jasperanelechukwu.android.courseadvizor.ui.customviews.CustomEditTextLayout
+                android:id="@id/pin_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_md"
+                android:autofillHints="password"
+                android:hint="@string/pin"
+                android:inputType="numberPassword"
+                android:maxLength="4"
+                android:error="@{viewModel.signInUiState.pinError}"
+                android:enabled="@{!viewModel.signInUiState.loading}"
+                android:textChangedListener="@{viewModel::setPin}"
+                app:layout_constraintBottom_toTopOf="@id/sign_up_button"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/phone_number_edit_text" />
+
+            <com.jasperanelechukwu.android.courseadvizor.ui.customviews.CustomFormButtonLayout
+                android:id="@id/sign_up_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dimen_md"
+                android:text="@string/sign_in"
+                android:loading="@{viewModel.signInUiState.loading}"
+                android:onClick="@{()-> viewModel.signIn()}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pin_edit_text" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+</layout>

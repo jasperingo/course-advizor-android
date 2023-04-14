@@ -1,4 +1,4 @@
-package com.jasperanelechukwu.android.courseadvizor.entities.webservice;
+package com.jasperanelechukwu.android.courseadvizor.entities.remote;
 
 import com.google.gson.annotations.SerializedName;
 

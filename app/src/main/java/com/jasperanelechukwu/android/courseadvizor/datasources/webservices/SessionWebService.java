@@ -1,7 +1,7 @@
 package com.jasperanelechukwu.android.courseadvizor.datasources.webservices;
 
 import com.jasperanelechukwu.android.courseadvizor.entities.Session;
-import com.jasperanelechukwu.android.courseadvizor.entities.webservice.WebServiceDto;
+import com.jasperanelechukwu.android.courseadvizor.entities.remote.ResponseDto;
 
 import java.util.List;
 
@@ -11,5 +11,5 @@ import retrofit2.http.GET;
 
 public interface SessionWebService {
     @GET("session")
-    Single<Response<WebServiceDto<List<Session>>>> getAll();
+    Single<Response<ResponseDto<List<Session>>>> getAll();
 }

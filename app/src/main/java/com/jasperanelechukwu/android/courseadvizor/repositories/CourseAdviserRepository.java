@@ -2,9 +2,12 @@ package com.jasperanelechukwu.android.courseadvizor.repositories;
 
 import com.jasperanelechukwu.android.courseadvizor.datasources.remote.CourseAdviserRemoteDataSource;
 import com.jasperanelechukwu.android.courseadvizor.entities.CourseAdviser;
+import com.jasperanelechukwu.android.courseadvizor.entities.remote.AuthCourseAdviserDto;
+import com.jasperanelechukwu.android.courseadvizor.entities.ui.SignInFormUiState;
 import com.jasperanelechukwu.android.courseadvizor.entities.ui.SignUpFormUiState;
-import com.jasperanelechukwu.android.courseadvizor.entities.webservice.CreateCourseAdviserDto;
+import com.jasperanelechukwu.android.courseadvizor.entities.remote.CreateCourseAdviserDto;
 import com.jasperanelechukwu.android.courseadvizor.exceptions.InvalidFormException;
+import com.jasperanelechukwu.android.courseadvizor.exceptions.InvalidSignInFormException;
 import com.jasperanelechukwu.android.courseadvizor.exceptions.InvalidSignUpFormException;
 
 import javax.inject.Inject;
@@ -70,6 +73,42 @@ public class CourseAdviserRepository {
                 if (throwable instanceof InvalidFormException) {
                     final InvalidFormException formException = (InvalidFormException) throwable;
                     return Single.error(new InvalidSignUpFormException(formException.getMessage(), formException.getInputErrors()));
+                }
+
+                return Single.error(throwable);
+            });
+    }
+
+    public Single<CourseAdviser> auth(final SignInFormUiState signInFormUiState) {
+        final InvalidFormException.InputErrorList inputErrors = new InvalidFormException.InputErrorList();
+
+        if (signInFormUiState.getPhoneNumber() == null || signInFormUiState.getPhoneNumber().trim().isEmpty()) {
+            inputErrors.addInputRequired("phone_number", signInFormUiState.getPhoneNumber());
+        } else if (!signInFormUiState.getPhoneNumber().matches("^0\\d{10}$")) {
+            inputErrors.addInputInvalid("phone_number", signInFormUiState.getPhoneNumber());
+        }
+
+        if (signInFormUiState.getPin() == null || signInFormUiState.getPin().trim().isEmpty()) {
+            inputErrors.addInputRequired("pin", signInFormUiState.getPin());
+        } else if (!signInFormUiState.getPin().matches("^\\d{4}$")) {
+            inputErrors.addInputInvalid("pin", signInFormUiState.getPin());
+        }
+
+        if (inputErrors.hasError()) {
+            return Single.error(new InvalidSignInFormException("Client validation", inputErrors));
+        }
+
+        final AuthCourseAdviserDto dto = new AuthCourseAdviserDto(
+            signInFormUiState.getPin(),
+            signInFormUiState.getPhoneNumber()
+        );
+
+        return courseAdviserRemoteDataSource.auth(dto)
+            .subscribeOn(Schedulers.io())
+            .onErrorResumeNext(throwable -> {
+                if (throwable instanceof InvalidFormException) {
+                    final InvalidFormException formException = (InvalidFormException) throwable;
+                    return Single.error(new InvalidSignInFormException(formException.getMessage(), formException.getInputErrors()));
                 }
 
                 return Single.error(throwable);
