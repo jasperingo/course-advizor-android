@@ -19,8 +19,7 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar
-            style="@style/CustomToolBar"
-            android:theme="@style/CustomToolBarTheme"
+            android:theme="@style/CustomToolBarWithNavUp"
             android:id="@id/tool_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"

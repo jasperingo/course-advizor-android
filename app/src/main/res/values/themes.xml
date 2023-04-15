@@ -14,16 +14,16 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="CustomToolBarTheme" parent="ThemeOverlay.AppCompat.ActionBar">
+    <style name="CustomToolBar" parent="ThemeOverlay.AppCompat.Light">
         <item name="colorControlNormal">?attr/colorOnPrimary</item>
+        <item name="android:textColorPrimary">?attr/colorOnPrimary</item>
+        <item name="android:textColorSecondary">?attr/colorOnPrimary</item>
+        <item name="android:background">?attr/colorPrimary</item>
+        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
-    <style name="CustomToolBar" parent="ThemeOverlay.AppCompat.ActionBar">
-        <item name="android:background">?attr/colorPrimary</item>
-        <item name="android:elevation">4dp</item>
-        <item name="titleTextColor">?attr/colorOnPrimary</item>
+    <style name="CustomToolBarWithNavUp" parent="CustomToolBar">
         <item name="navigationIcon">?attr/homeAsUpIndicator</item>
-        <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
     <style name="CustomAuthButton">

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@id/navStudentsFragment"
+        android:title="@string/students"
+        android:icon="@drawable/ic_students_24" />
+    <item android:id="@id/navResultsFragment"
+        android:title="@string/results"
+        android:icon="@drawable/ic_results_24" />
+    <item android:id="@id/navAppointmentsFragment"
+        android:title="@string/appointments"
+        android:icon="@drawable/ic_appointments_24" />
+    <item android:id="@id/navReportsFragment"
+        android:title="@string/reports"
+        android:icon="@drawable/ic_reports_24" />
+</menu>
