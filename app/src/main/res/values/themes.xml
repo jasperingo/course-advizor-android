@@ -44,4 +44,17 @@
         <item name="android:paddingBottom">@dimen/dimen_md</item>
         <item name="cornerRadius">@dimen/dimen_md</item>
     </style>
+
+    <style name="CustomProfileTextView">
+        <item name="android:paddingRight">@dimen/dimen_md</item>
+        <item name="android:paddingLeft">@dimen/dimen_md</item>
+        <item name="android:paddingTop">@dimen/dimen_md</item>
+        <item name="android:paddingBottom">@dimen/dimen_md</item>
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+
+    <style name="CustomCircleImageView" parent="Theme.CourseAdvizor">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

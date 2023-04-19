@@ -4,31 +4,102 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="user"
+            type="com.jasperanelechukwu.android.courseadvizor.entities.CourseAdviser" />
+
+        <variable
+            name="activity"
+            type="com.jasperanelechukwu.android.courseadvizor.ui.ProfileActivity" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.ProfileActivity">
 
         <androidx.appcompat.widget.Toolbar
-            android:theme="@style/CustomToolBar"
             android:id="@id/tool_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="@string/profile"
+            android:theme="@style/CustomToolBar"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/txtBox" />
+            app:title="@string/profile" />
 
-        <TextView
-            android:id="@+id/txtBox"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:text="@string/profile"
-            app:layout_constraintTop_toBottomOf="@id/tool_bar"
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@id/avatar_image_view"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_margin="@dimen/dimen_md"
+            android:src="@drawable/ic_person_24"
+            app:strokeWidth="1dp"
+            app:strokeColor="@android:color/darker_gray"
+            app:shapeAppearanceOverlay="@style/CustomCircleImageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/tool_bar"
+            />
+
+        <TextView
+            style="@style/CustomProfileTextView"
+            android:id="@id/full_name_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{user.fullName}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/avatar_image_view"
+            tools:text="@string/profile" />
+
+        <TextView
+            style="@style/CustomProfileTextView"
+            android:id="@id/phone_number_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{user.phoneNumber}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/full_name_text_view"
+            tools:text="@string/profile" />
+
+        <TextView
+            style="@style/CustomProfileTextView"
+            android:id="@id/department_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{user.department.toString()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/phone_number_text_view"
+            tools:text="@string/profile" />
+
+        <TextView
+            style="@style/CustomProfileTextView"
+            android:id="@id/session_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{@string/session__format(user.session.toString())}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/department_text_view"
+            tools:text="@string/profile" />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/CustomFormButton"
+            android:id="@id/sign_out_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_md"
+            android:text="@string/sign_out"
+            android:backgroundTint="?attr/colorError"
+            android:onClick="@{()-> activity.signOutClicked()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/session_text_view"
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

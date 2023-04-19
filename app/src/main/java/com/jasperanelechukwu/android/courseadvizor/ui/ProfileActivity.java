@@ -2,6 +2,7 @@ package com.jasperanelechukwu.android.courseadvizor.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.jasperanelechukwu.android.courseadvizor.databinding.ActivityProfileBinding;
@@ -28,5 +29,19 @@ public class ProfileActivity extends AppCompatActivity {
         setSupportActionBar(binding.toolBar);
 
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        binding.setUser(appStore.getCourseAdviser());
+
+        binding.setActivity(this);
+    }
+
+    public void signOutClicked() {
+        appStore.setCourseAdviser(null);
+
+        Intent intent = new Intent(this, AuthActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        startActivity(intent);
+        finish();
     }
 }

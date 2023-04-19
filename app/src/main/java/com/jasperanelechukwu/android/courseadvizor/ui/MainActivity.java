@@ -64,20 +64,21 @@ public class MainActivity extends AppCompatActivity {
             );
         }
 
-        CourseAdviser courseAdviser = new CourseAdviser();
-        courseAdviser.setId(1L);
-        courseAdviser.setFirstName("Jasper");
-        courseAdviser.setLastName("Anelechukwu");
-        courseAdviser.setPhoneNumber("+2349030572411");
-        Department department = new Department();
-        department.setName("Information Technology");
-        department.setAbbreviation("IFT");
-        courseAdviser.setDepartment(department);
-        Session session = new Session();
-        session.setStartedAt(2016);
-        session.setEndedAt(2017);
-        courseAdviser.setSession(session);
-        appStore.setCourseAdviser(courseAdviser);
+//        CourseAdviser courseAdviser = new CourseAdviser();
+//        courseAdviser.setId(1L);
+//        courseAdviser.setFirstName("Jasper");
+//        courseAdviser.setLastName("Anelechukwu");
+//        courseAdviser.setPhoneNumber("+2349030572411");
+//        Department department = new Department();
+//        department.setName("Information Technology");
+//        department.setAbbreviation("IFT");
+//        courseAdviser.setDepartment(department);
+//        Session session = new Session();
+//        session.setId(12);
+//        session.setStartedAt(2016);
+//        session.setEndedAt(2017);
+//        courseAdviser.setSession(session);
+//        appStore.setCourseAdviser(courseAdviser);
 
         if (appStore.getCourseAdviser() == null && navController != null) {
             navController.navigate(R.id.action_global_authActivity);

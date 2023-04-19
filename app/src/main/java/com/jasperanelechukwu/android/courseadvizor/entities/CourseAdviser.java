@@ -20,4 +20,8 @@ public class CourseAdviser {
     private Department department;
 
     private Session session;
+
+    public String getFullName() {
+        return firstName+" "+lastName;
+    }
 }

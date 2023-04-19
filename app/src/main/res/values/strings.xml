@@ -12,6 +12,7 @@
 
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>
+    <string name="sign_out">Sign out</string>
 
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
@@ -27,6 +28,9 @@
     <string name="this_field_do_not_exist">This field do not exist</string>
     <string name="this_field_already_exists">This field already exists</string>
     <string name="course_adviser_with_session_and_department_already_exists">Course adviser with session and department already exists</string>
+
+    <string name="session__format">%1$s session.</string>
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
