@@ -1,4 +1,4 @@
-package com.jasperanelechukwu.android.courseadvizor.ui.fragments;
+package com.jasperanelechukwu.android.courseadvizor.ui.fragments.dashboard;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

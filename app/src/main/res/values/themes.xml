@@ -22,10 +22,6 @@
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
-    <style name="CustomToolBarWithNavUp" parent="CustomToolBar">
-        <item name="navigationIcon">?attr/homeAsUpIndicator</item>
-    </style>
-
     <style name="CustomAuthButton">
         <item name="android:textAllCaps">false</item>
         <item name="android:layout_marginBottom">@dimen/dimen_lg</item>

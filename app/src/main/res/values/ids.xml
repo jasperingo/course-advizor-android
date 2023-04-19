@@ -2,7 +2,7 @@
 <resources>
 
     <!-- Nav destination ids -->
-    <item type="id" name="navProfileActivity" />
+    <item type="id" name="navProfileFragment" />
     <item type="id" name="navStudentsFragment" />
     <item type="id" name="navResultsFragment" />
     <item type="id" name="navReportsFragment" />
@@ -10,6 +10,7 @@
     <item type="id" name="navAuthMainFragment" />
     <item type="id" name="navSignUpFragment" />
     <item type="id" name="navSignInFragment" />
+    <item type="id" name="navDashboardFragment" />
     <item type="id" name="navAuthFragment" />
     <item type="id" name="navMainActivity" />
 
@@ -22,6 +23,7 @@
     <item type="id" name="main_bottom_nav" />
     <item type="id" name="main_nav_host_fragment" />
     <item type="id" name="auth_nav_host_fragment" />
+    <item type="id" name="dashboard_nav_host_fragment" />
     <item type="id" name="auth_main_heading" />
     <item type="id" name="auth_main_description" />
     <item type="id" name="sign_up_button" />

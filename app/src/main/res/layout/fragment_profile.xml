@@ -10,14 +10,14 @@
             type="com.jasperanelechukwu.android.courseadvizor.entities.CourseAdviser" />
 
         <variable
-            name="activity"
-            type="com.jasperanelechukwu.android.courseadvizor.ui.ProfileActivity" />
+            name="fragment"
+            type="com.jasperanelechukwu.android.courseadvizor.ui.fragments.ProfileFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.ProfileActivity">
+        tools:context=".ui.fragments.ProfileFragment">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@id/tool_bar"
@@ -95,7 +95,7 @@
             android:layout_margin="@dimen/dimen_md"
             android:text="@string/sign_out"
             android:backgroundTint="?attr/colorError"
-            android:onClick="@{()-> activity.signOutClicked()}"
+            android:onClick="@{()-> fragment.signOutClicked()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/session_text_view"

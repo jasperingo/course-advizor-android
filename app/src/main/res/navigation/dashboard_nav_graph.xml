@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dashboard_nav_graph"
+    app:startDestination="@id/navStudentsFragment">
+
+    <fragment
+        android:id="@id/navStudentsFragment"
+        android:name="com.jasperanelechukwu.android.courseadvizor.ui.fragments.dashboard.StudentsFragment"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_students" />
+
+    <fragment
+        android:id="@id/navResultsFragment"
+        android:name="com.jasperanelechukwu.android.courseadvizor.ui.fragments.dashboard.ResultsFragment"
+        android:label="@string/results"
+        tools:layout="@layout/fragment_results" />
+
+    <fragment
+        android:id="@id/navAppointmentsFragment"
+        android:name="com.jasperanelechukwu.android.courseadvizor.ui.fragments.dashboard.AppointmentsFragment"
+        android:label="@string/appointments"
+        tools:layout="@layout/fragment_appointments" />
+
+    <fragment
+        android:id="@id/navReportsFragment"
+        android:name="com.jasperanelechukwu.android.courseadvizor.ui.fragments.dashboard.ReportsFragment"
+        android:label="@string/reports"
+        tools:layout="@layout/fragment_reports" />
+
+</navigation>

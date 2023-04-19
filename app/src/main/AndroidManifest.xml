@@ -16,7 +16,7 @@
         android:theme="@style/Theme.CourseAdvizor"
         tools:targetApi="31">
         <activity
-            android:name=".ui.ProfileActivity"
+            android:name=".ui.fragments.ProfileFragment"
             android:exported="false"
             android:parentActivityName=".ui.MainActivity" />
         <activity

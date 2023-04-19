@@ -85,7 +85,7 @@ public class AuthFragment extends Fragment {
         if (courseAdviser != null) {
             appStore.setCourseAdviser(courseAdviser);
 
-            navController.navigate(R.id.action_navAuthFragment_to_navStudentsFragment);
+            navController.navigate(R.id.action_navAuthFragment_to_navDashboardFragment);
         }
     }
 }
