@@ -1,4 +1,4 @@
-package com.jasperanelechukwu.android.courseadvizor.ui.fragments;
+package com.jasperanelechukwu.android.courseadvizor.ui.fragments.auth;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -39,7 +39,7 @@ public class SignUpFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final SignUpViewModel viewModel = new ViewModelProvider(requireActivity()).get(SignUpViewModel.class);
+        final SignUpViewModel viewModel = new ViewModelProvider(requireParentFragment().requireParentFragment()).get(SignUpViewModel.class);
 
         binding.setViewModel(viewModel);
 

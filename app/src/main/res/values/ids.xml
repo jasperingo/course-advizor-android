@@ -10,7 +10,7 @@
     <item type="id" name="navAuthMainFragment" />
     <item type="id" name="navSignUpFragment" />
     <item type="id" name="navSignInFragment" />
-    <item type="id" name="navAuthActivity" />
+    <item type="id" name="navAuthFragment" />
     <item type="id" name="navMainActivity" />
 
     <!-- Nav ids -->

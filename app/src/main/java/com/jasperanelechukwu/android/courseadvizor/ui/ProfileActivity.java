@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.jasperanelechukwu.android.courseadvizor.databinding.ActivityProfileBinding;
+import com.jasperanelechukwu.android.courseadvizor.ui.fragments.AuthFragment;
 import com.jasperanelechukwu.android.courseadvizor.utils.AppStore;
 
 import java.util.Objects;
@@ -38,7 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void signOutClicked() {
         appStore.setCourseAdviser(null);
 
-        Intent intent = new Intent(this, AuthActivity.class);
+        Intent intent = new Intent(this, AuthFragment.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         startActivity(intent);

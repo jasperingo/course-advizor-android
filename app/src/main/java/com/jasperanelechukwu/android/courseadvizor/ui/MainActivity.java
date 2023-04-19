@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
 //        appStore.setCourseAdviser(courseAdviser);
 
         if (appStore.getCourseAdviser() == null && navController != null) {
-            navController.navigate(R.id.action_global_authActivity);
+            navController.navigate(R.id.action_global_authFragment);
         }
     }
 

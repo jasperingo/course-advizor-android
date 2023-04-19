@@ -6,17 +6,23 @@
     app:startDestination="@id/navStudentsFragment">
 
     <action
-        android:id="@+id/action_global_authActivity"
-        app:destination="@id/navAuthActivity"
+        android:id="@+id/action_global_authFragment"
+        app:destination="@id/navAuthFragment"
         app:popUpTo="@id/main_nav_graph"
         app:popUpToInclusive="true" />
 
-    <activity
-        android:id="@id/navAuthActivity"
-        android:name="com.jasperanelechukwu.android.courseadvizor.ui.AuthActivity"
+    <fragment
+        android:id="@id/navAuthFragment"
+        android:name="com.jasperanelechukwu.android.courseadvizor.ui.fragments.AuthFragment"
         android:label="activity_auth"
-        tools:layout="@layout/activity_auth"
-        />
+        tools:layout="@layout/fragment_auth"
+        >
+        <action
+            android:id="@+id/action_navAuthFragment_to_navStudentsFragment"
+            app:destination="@id/navStudentsFragment"
+            app:popUpTo="@id/main_nav_graph"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@id/navStudentsFragment"

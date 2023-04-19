@@ -1,4 +1,4 @@
-package com.jasperanelechukwu.android.courseadvizor.ui.fragments;
+package com.jasperanelechukwu.android.courseadvizor.ui.fragments.auth;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -36,7 +36,7 @@ public class SignInFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final SignInViewModel viewModel = new ViewModelProvider(requireActivity()).get(SignInViewModel.class);
+        final SignInViewModel viewModel = new ViewModelProvider(requireParentFragment().requireParentFragment()).get(SignInViewModel.class);
 
         binding.setViewModel(viewModel);
 

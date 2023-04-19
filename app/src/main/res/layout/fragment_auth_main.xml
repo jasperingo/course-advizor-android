@@ -3,12 +3,12 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.fragments.AuthMainFragment">
+    tools:context=".ui.fragments.auth.AuthMainFragment">
 
     <data>
         <variable
             name="fragment"
-            type="com.jasperanelechukwu.android.courseadvizor.ui.fragments.AuthMainFragment" />
+            type="com.jasperanelechukwu.android.courseadvizor.ui.fragments.auth.AuthMainFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -53,7 +53,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sign_in"
-            android:onClick="@{fragment::onSignInButtonClicked}"
+            android:onClick="@{() -> fragment.onSignInButtonClicked()}"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/auth_main_description"
@@ -66,7 +66,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/sign_up"
-            android:onClick="@{fragment::onSignUpButtonClicked}"
+            android:onClick="@{()-> fragment.onSignUpButtonClicked()}"
             android:textColor="?attr/colorPrimary"
             android:backgroundTint="?attr/colorSurface"
             app:layout_constraintBottom_toBottomOf="parent"

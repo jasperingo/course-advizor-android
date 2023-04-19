@@ -26,8 +26,6 @@ import io.reactivex.rxjava3.disposables.Disposable;
 public class SignUpViewModel extends ViewModel {
     private final SignUpFormUiState signUpFormUiState = new SignUpFormUiState();
 
-    private final MutableLiveData<Boolean> navigateBack = new MutableLiveData<>();
-
     private final MutableLiveData<CourseAdviser> courseAdviser = new MutableLiveData<>();
 
     private final MutableLiveData<SignUpUiState> signUpUiState = new MutableLiveData<>();
@@ -53,14 +51,6 @@ public class SignUpViewModel extends ViewModel {
         this.sessionRepository = sessionRepository;
         this.departmentRepository = departmentRepository;
         this.courseAdviserRepository = courseAdviserRepository;
-    }
-
-    public LiveData<Boolean> getNavigateBack() {
-        if (navigateBack.getValue() == null) {
-            navigateBack.setValue(false);
-        }
-
-        return navigateBack;
     }
 
     public LiveData<CourseAdviser> getCourseAdviser() {
@@ -135,10 +125,6 @@ public class SignUpViewModel extends ViewModel {
                     }
                 }
             );
-    }
-
-    public void doNavigateBack() {
-        navigateBack.setValue(true);
     }
 
     public void fetchDepartmentsAndSessions() {

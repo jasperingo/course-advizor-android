@@ -22,8 +22,6 @@ public class SignInViewModel extends ViewModel {
 
     private final MutableLiveData<SignInUiState> signInUiState = new MutableLiveData<>();
 
-    private final MutableLiveData<Boolean> navigateBack = new MutableLiveData<>();
-
     private final MutableLiveData<CourseAdviser> courseAdviser = new MutableLiveData<>();
 
     private final CourseAdviserRepository courseAdviserRepository;
@@ -33,14 +31,6 @@ public class SignInViewModel extends ViewModel {
     @Inject
     public SignInViewModel(CourseAdviserRepository courseAdviserRepository) {
         this.courseAdviserRepository = courseAdviserRepository;
-    }
-
-    public LiveData<Boolean> getNavigateBack() {
-        if (navigateBack.getValue() == null) {
-            navigateBack.setValue(false);
-        }
-
-        return navigateBack;
     }
 
     public LiveData<SignInUiState> getSignInUiState() {
@@ -87,10 +77,6 @@ public class SignInViewModel extends ViewModel {
                     }
                 }
             );
-    }
-
-    public void doNavigateBack() {
-        navigateBack.setValue(true);
     }
 
     @Override
