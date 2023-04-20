@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.jasperanelechukwu.android.courseadvizor.R;
 import com.jasperanelechukwu.android.courseadvizor.databinding.FragmentDashboardBinding;
 

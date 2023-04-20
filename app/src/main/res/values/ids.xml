@@ -57,6 +57,7 @@
     <item type="id" name="phone_number_text_view" />
     <item type="id" name="session_text_view" />
     <item type="id" name="department_text_view" />
+    <item type="id" name="matriculation_number_text_view" />
 
     <item type="id" name="students_list_view" />
 

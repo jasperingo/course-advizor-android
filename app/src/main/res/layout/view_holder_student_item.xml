@@ -10,35 +10,57 @@
             type="com.jasperanelechukwu.android.courseadvizor.entities.Student" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/dimen_md">
+        android:layout_marginHorizontal="@dimen/dimen_sm"
+        android:layout_marginTop="@dimen/dimen_md"
+        app:cardElevation="@dimen/dimen_xs"
+        app:cardCornerRadius="@dimen/dimen_md"
+        >
 
-        <ImageView
-            android:id="@id/avatar_image_view"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:imageResource="@{student.image}"
-            android:contentDescription="@string/student"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:src="@drawable/ic_students_24"
-            />
-
-        <TextView
-            android:id="@id/full_name_text_view"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="@{student.name}"
-            android:textColor="?attr/colorOnSurface"
-            android:textSize="@dimen/dimen_text_lg"
-            app:layout_constraintVertical_bias="0.493"
-            app:layout_constraintStart_toEndOf="@id/avatar_image_view"
-            app:layout_constraintTop_toTopOf="@id/avatar_image_view"
-            app:layout_constraintBottom_toBottomOf="@id/avatar_image_view"
-            tools:text="@string/student" />
+            android:padding="@dimen/dimen_md">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@id/full_name_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{student.fullName}"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/matriculation_number_text_view"
+                tools:text="@string/student" />
+
+            <TextView
+                android:id="@id/matriculation_number_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{student.matriculationNumber}"
+                android:textColor="?attr/colorOnSurface"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/full_name_text_view"
+                app:layout_constraintBottom_toTopOf="@id/phone_number_text_view"
+                tools:text="@string/student" />
+
+            <TextView
+                android:id="@id/phone_number_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{student.phoneNumber}"
+                android:textColor="?attr/colorPrimaryVariant"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/matriculation_number_text_view"
+                tools:text="@string/student" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </layout>

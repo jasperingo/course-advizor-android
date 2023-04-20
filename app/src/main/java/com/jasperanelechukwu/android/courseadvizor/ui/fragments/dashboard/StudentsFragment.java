@@ -8,16 +8,17 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.jasperanelechukwu.android.courseadvizor.R;
-import com.jasperanelechukwu.android.courseadvizor.entities.Student;
 import com.jasperanelechukwu.android.courseadvizor.ui.adapters.StudentListAdapter;
+import com.jasperanelechukwu.android.courseadvizor.viewmodels.StudentsViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
+import dagger.hilt.android.AndroidEntryPoint;
 
+@AndroidEntryPoint
 public class StudentsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,9 +26,7 @@ public class StudentsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_students, container, false);
     }
 
@@ -35,16 +34,17 @@ public class StudentsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        List<Student> students = new ArrayList<>();
+        final StudentsViewModel viewModel = new ViewModelProvider(this).get(StudentsViewModel.class);
 
-        for (int i = 0; i < 40; i++) {
-            Student student = new Student();
-            student.setName("Jasper Anelechukwu");
-            student.setImage(R.drawable.ic_students_24);
-            students.add(student);
-        }
+        final StudentListAdapter listAdapter = new StudentListAdapter(view1 -> viewModel.fetchStudents());
 
-        StudentListAdapter listAdapter = new StudentListAdapter(students);
+        viewModel.getStudentsUiState().observe(getViewLifecycleOwner(), studentsUiState -> {
+            listAdapter.setUiState(studentsUiState);
+
+            if (!studentsUiState.isLoaded() && !studentsUiState.isLoading() && studentsUiState.getError() == null) {
+                viewModel.fetchStudents();
+            }
+        });
 
         RecyclerView recyclerView = view.findViewById(R.id.students_list_view);
 

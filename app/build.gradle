@@ -35,7 +35,12 @@ android {
 
 dependencies {
     def nav_version = "2.5.3"
-    def room_version = "2.5.0"
+    def room_version = "2.5.1"
+    def lombok_version = "1.18.26"
+
+    //noinspection AnnotationProcessorOnCompilePath
+    compileOnly "org.projectlombok:lombok:$lombok_version"
+    annotationProcessor "org.projectlombok:lombok:$lombok_version"
 
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
@@ -56,9 +61,6 @@ dependencies {
 
     implementation 'io.reactivex.rxjava3:rxjava:3.1.5'
     implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
-
-    compileOnly 'org.projectlombok:lombok:1.18.26'
-    annotationProcessor 'org.projectlombok:lombok:1.18.26'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

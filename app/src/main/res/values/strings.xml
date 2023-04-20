@@ -29,6 +29,8 @@
     <string name="this_field_already_exists">This field already exists</string>
     <string name="course_adviser_with_session_and_department_already_exists">Course adviser with session and department already exists</string>
 
+    <string name="no_student_found">No student found</string>
+
     <string name="session__format">%1$s session.</string>
 
 
