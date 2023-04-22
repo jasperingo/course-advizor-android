@@ -36,9 +36,9 @@ public class StudentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         this.uiState = uiState;
 
         if (hasExtraOneItem()) {
-            notifyItemInserted(0);
+            notifyItemChanged(0);
         } else {
-            notifyItemRangeRemoved(0, 1);
+            notifyItemRemoved(0);
             notifyItemRangeInserted(0, uiState.getStudents().size());
         }
     }
@@ -46,15 +46,17 @@ public class StudentListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+
         switch (viewType) {
             case VIEW_TYPE_PROGRESS_BAR:
-                return new ProgressBarViewHolder(ViewHolderProgressBarBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+                return new ProgressBarViewHolder(ViewHolderProgressBarBinding.inflate(inflater, parent, false));
             case VIEW_TYPE_ERROR:
-                return new ErrorViewHolder(ViewHolderErrorBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+                return new ErrorViewHolder(ViewHolderErrorBinding.inflate(inflater, parent, false));
             case VIEW_TYPE_EMPTY_LIST:
-                return new EmptyListViewHolder(ViewHolderEmptyListBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+                return new EmptyListViewHolder(ViewHolderEmptyListBinding.inflate(inflater, parent, false));
             default:
-                return new StudentItemViewHolder(ViewHolderStudentItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
+                return new StudentItemViewHolder(ViewHolderStudentItemBinding.inflate(inflater, parent, false));
         }
     }
 

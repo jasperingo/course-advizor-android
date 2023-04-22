@@ -15,11 +15,16 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.jasperanelechukwu.android.courseadvizor.R;
 import com.jasperanelechukwu.android.courseadvizor.databinding.FragmentProfileBinding;
+import com.jasperanelechukwu.android.courseadvizor.datasources.daos.AppDatabase;
 import com.jasperanelechukwu.android.courseadvizor.utils.AppStore;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.schedulers.Schedulers;
 
 @AndroidEntryPoint
 public class ProfileFragment extends Fragment {
@@ -27,8 +32,13 @@ public class ProfileFragment extends Fragment {
 
     private NavController navController;
 
+    private Disposable signOutDisposable;
+
     @Inject
     AppStore appStore;
+
+    @Inject
+    AppDatabase appDatabase;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,6 +71,18 @@ public class ProfileFragment extends Fragment {
 
     public void signOutClicked() {
         appStore.setCourseAdviser(null);
-        navController.navigate(R.id.action_global_authFragment);
+        signOutDisposable = Completable.fromAction(() -> appDatabase.clearAllTables())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(() -> navController.navigate(R.id.action_global_authFragment));
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        if (signOutDisposable != null && !signOutDisposable.isDisposed()) {
+            signOutDisposable.dispose();
+        }
     }
 }

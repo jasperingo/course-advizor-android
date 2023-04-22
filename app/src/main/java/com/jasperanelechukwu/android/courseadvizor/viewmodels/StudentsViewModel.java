@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.jasperanelechukwu.android.courseadvizor.entities.ui.StudentsUiState;
 import com.jasperanelechukwu.android.courseadvizor.repositories.StudentRepository;
+import com.jasperanelechukwu.android.courseadvizor.utils.AppStore;
 
 import javax.inject.Inject;
 
@@ -19,10 +20,13 @@ public class StudentsViewModel extends ViewModel {
 
     private final StudentRepository studentRepository;
 
+    private final AppStore appStore;
+
     private Disposable studentsDisposable;
 
     @Inject
-    public StudentsViewModel(StudentRepository studentRepository) {
+    public StudentsViewModel(StudentRepository studentRepository, AppStore appStore) {
+        this.appStore = appStore;
         this.studentRepository = studentRepository;
     }
 
@@ -37,7 +41,7 @@ public class StudentsViewModel extends ViewModel {
     public void fetchStudents() {
         studentsUiState.setValue(new StudentsUiState(true));
 
-        studentsDisposable = studentRepository.getAllStudents()
+        studentsDisposable = studentRepository.getAllStudents(appStore.getCourseAdviser().getId())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 students -> studentsUiState.setValue(new StudentsUiState(students, true)),

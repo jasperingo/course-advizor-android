@@ -14,8 +14,4 @@ public class AppStore {
 
     @Inject
     public AppStore() {}
-
-    public String getAuthToken() {
-        return "Bearer "+courseAdviser.getId();
-    }
 }

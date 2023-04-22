@@ -32,8 +32,8 @@ public abstract class ApplicationModule {
     @Provides
     @Singleton
     public static AppDatabase provideAppDatabase(@ApplicationContext Context context) {
-        return Room.databaseBuilder(context, AppDatabase.class, "course_advizor")
-                .fallbackToDestructiveMigration() //TODO: remove
-                .build();
+        return Room.databaseBuilder(context, AppDatabase.class, AppDatabase.NAME)
+            .fallbackToDestructiveMigration() //TODO: remove
+            .build();
     }
 }

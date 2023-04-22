@@ -31,7 +31,6 @@ public class CourseAdviserRemoteDataSource {
                 throw new InvalidFormException(response.message(), webService.convertErrorBody(response, InvalidFormException.InputErrorList.class));
             } else {
                 throw new RemoteDataSourceException(
-                    response.message(),
                     webService.convertErrorBody(response, RemoteDataSourceException.RemoteDataSourceError.class)
                 );
             }
@@ -46,7 +45,6 @@ public class CourseAdviserRemoteDataSource {
                 throw new InvalidFormException(response.message(), webService.convertErrorBody(response, InvalidFormException.InputErrorList.class));
             } else {
                 throw new RemoteDataSourceException(
-                    response.message(),
                     webService.convertErrorBody(response, RemoteDataSourceException.RemoteDataSourceError.class)
                 );
             }

@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
                 .findFragmentById(R.id.main_nav_host_fragment);
 
         CourseAdviser courseAdviser = new CourseAdviser();
-        courseAdviser.setId(1L);
+        courseAdviser.setId(12L);
         courseAdviser.setFirstName("Jasper");
         courseAdviser.setLastName("Anelechukwu");
         courseAdviser.setPhoneNumber("+2349030572411");

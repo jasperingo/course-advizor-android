@@ -5,8 +5,8 @@ import lombok.Data;
 public class RemoteDataSourceException extends Exception {
     private final RemoteDataSourceError data;
 
-    public RemoteDataSourceException(String message, RemoteDataSourceError data) {
-        super(message);
+    public RemoteDataSourceException(RemoteDataSourceError data) {
+        super(data.getMessage());
         this.data = data;
     }
 

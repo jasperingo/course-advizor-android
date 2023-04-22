@@ -28,7 +28,6 @@ public class SessionRemoteDataSource {
                 return response.body().getData();
             } else {
                 throw new RemoteDataSourceException(
-                    response.message(),
                     webService.convertErrorBody(response, RemoteDataSourceException.RemoteDataSourceError.class)
                 );
             }
