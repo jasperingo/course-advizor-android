@@ -35,12 +35,26 @@
             android:layout_height="150dp"
             android:layout_margin="@dimen/dimen_md"
             android:src="@drawable/ic_person_24"
+            android:scaleType="centerCrop"
             app:strokeWidth="1dp"
             app:strokeColor="@android:color/darker_gray"
             app:shapeAppearanceOverlay="@style/CustomCircleImageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tool_bar"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            style="@style/CustomFormButton"
+            android:id="@id/avatar_select_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dimen_md"
+            android:text="@string/select_image"
+            android:onClick="@{()-> fragment.selectImage()}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/avatar_image_view"
             />
 
         <TextView
@@ -51,7 +65,7 @@
             android:text="@{user.fullName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/avatar_image_view"
+            app:layout_constraintTop_toBottomOf="@id/avatar_select_button"
             tools:text="@string/profile" />
 
         <TextView

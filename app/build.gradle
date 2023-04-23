@@ -37,6 +37,7 @@ dependencies {
     def nav_version = "2.5.3"
     def room_version = "2.5.1"
     def lombok_version = "1.18.26"
+    def datastore_version = "1.0.0"
 
     //noinspection AnnotationProcessorOnCompilePath
     compileOnly "org.projectlombok:lombok:$lombok_version"
@@ -45,6 +46,9 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-rxjava3:$room_version"
+
+    implementation "androidx.datastore:datastore-preferences:$datastore_version"
+    implementation "androidx.datastore:datastore-preferences-rxjava3:$datastore_version"
 
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-ui:$nav_version"

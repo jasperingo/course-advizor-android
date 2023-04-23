@@ -2,6 +2,9 @@ package com.jasperanelechukwu.android.courseadvizor;
 
 import android.content.Context;
 
+import androidx.datastore.preferences.core.Preferences;
+import androidx.datastore.preferences.rxjava3.RxPreferenceDataStoreBuilder;
+import androidx.datastore.rxjava3.RxDataStore;
 import androidx.room.Room;
 
 import com.jasperanelechukwu.android.courseadvizor.datasources.daos.AppDatabase;
@@ -21,6 +24,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @InstallIn(SingletonComponent.class)
 public abstract class ApplicationModule {
     @Provides
+    @Singleton
     public static Retrofit provideRetrofit() {
         return new Retrofit.Builder()
             .baseUrl("http://10.0.2.2:8080/api/")
@@ -35,5 +39,11 @@ public abstract class ApplicationModule {
         return Room.databaseBuilder(context, AppDatabase.class, AppDatabase.NAME)
             .fallbackToDestructiveMigration() //TODO: remove
             .build();
+    }
+
+    @Provides
+    @Singleton
+    public static RxDataStore<Preferences> provideDataStore(@ApplicationContext Context context) {
+         return new RxPreferenceDataStoreBuilder(context, "settings").build();
     }
 }

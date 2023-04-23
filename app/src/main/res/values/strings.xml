@@ -31,6 +31,8 @@
 
     <string name="no_student_found">No student found</string>
 
+    <string name="select_image">Select image</string>
+
     <string name="session__format">%1$s session.</string>
 
 
