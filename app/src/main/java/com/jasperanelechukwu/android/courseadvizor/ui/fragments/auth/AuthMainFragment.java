@@ -14,8 +14,7 @@ import com.jasperanelechukwu.android.courseadvizor.databinding.FragmentAuthMainB
 
 public class AuthMainFragment extends Fragment {
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         FragmentAuthMainBinding binding = FragmentAuthMainBinding.inflate(inflater, container, false);
 
         binding.setFragment(this);
