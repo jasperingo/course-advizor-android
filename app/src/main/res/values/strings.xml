@@ -30,9 +30,11 @@
     <string name="course_adviser_with_session_and_department_already_exists">Course adviser with session and department already exists</string>
 
     <string name="no_student_found">No student found</string>
+    <string name="no_result_found">No result found</string>
 
     <string name="select_image">Select image</string>
 
+    <string name="semester__format">%1$s semester.</string>
     <string name="session__format">%1$s session.</string>
 
 

@@ -2,9 +2,11 @@ package com.jasperanelechukwu.android.courseadvizor.repositories;
 
 import com.jasperanelechukwu.android.courseadvizor.datasources.remote.SessionRemoteDataSource;
 import com.jasperanelechukwu.android.courseadvizor.entities.Session;
+import com.jasperanelechukwu.android.courseadvizor.entities.remote.SessionDto;
 import com.jasperanelechukwu.android.courseadvizor.exceptions.RemoteDataSourceException;
 import com.jasperanelechukwu.android.courseadvizor.exceptions.RepositoryException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -23,6 +25,13 @@ public class SessionRepository {
     public Single<List<Session>> getAllSessions() {
         return sessionRemoteDataSource.getAll()
             .subscribeOn(Schedulers.io())
+            .map(sessionDtos -> {
+                List<Session> list = new ArrayList<>();
+                for(SessionDto dto: sessionDtos) {
+                    list.add(dto.toSessionEntity().toSession());
+                }
+                return list;
+            })
             .onErrorResumeNext(throwable -> {
                 if (throwable instanceof RemoteDataSourceException) {
                     return Single.error(new RepositoryException(((RemoteDataSourceException) throwable).getData().getMessage()));

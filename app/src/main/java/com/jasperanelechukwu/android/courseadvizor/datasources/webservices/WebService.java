@@ -35,6 +35,10 @@ public class WebService {
         return retrofit.create(StudentWebService.class);
     }
 
+    public ResultWebService getResultWebService() {
+        return retrofit.create(ResultWebService.class);
+    }
+
     public <T> T convertErrorBody(Response<?> response, Class<T> classObj) throws IOException {
         Converter<ResponseBody, T> converter = retrofit.responseBodyConverter(classObj, new Annotation[0]);
 

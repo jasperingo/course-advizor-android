@@ -61,5 +61,6 @@
     <item type="id" name="matriculation_number_text_view" />
 
     <item type="id" name="students_list_view" />
+    <item type="id" name="results_list_view" />
 
 </resources>

@@ -1,7 +1,5 @@
 package com.jasperanelechukwu.android.courseadvizor.entities;
 
-import androidx.annotation.NonNull;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,15 +7,18 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Session {
+public class Result {
+    public enum Semester {
+        first, second
+    }
+
     private long id;
 
-    private int startedAt;
+    private String courseCode;
 
-    private int endedAt;
+    private Semester semester;
 
-    @NonNull
-    public String toString() {
-        return id == 0 ? "" : startedAt+"/"+endedAt;
-    }
+    private String createdAt;
+
+    private Session session;
 }

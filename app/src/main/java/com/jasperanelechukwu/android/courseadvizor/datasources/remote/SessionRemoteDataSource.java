@@ -2,7 +2,7 @@ package com.jasperanelechukwu.android.courseadvizor.datasources.remote;
 
 import com.jasperanelechukwu.android.courseadvizor.datasources.webservices.SessionWebService;
 import com.jasperanelechukwu.android.courseadvizor.datasources.webservices.WebService;
-import com.jasperanelechukwu.android.courseadvizor.entities.Session;
+import com.jasperanelechukwu.android.courseadvizor.entities.remote.SessionDto;
 import com.jasperanelechukwu.android.courseadvizor.exceptions.RemoteDataSourceException;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class SessionRemoteDataSource {
         sessionWebService = webService.getSessionWebService();
     }
 
-    public Single<List<Session>> getAll() {
+    public Single<List<SessionDto>> getAll() {
         return sessionWebService.getAll().map((response) -> {
             if (response.isSuccessful() && response.body() != null) {
                 return response.body().getData();
