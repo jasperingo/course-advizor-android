@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_navDashboardFragment_to_navResultFragment"
             app:destination="@id/navResultFragment" />
+        <action
+            android:id="@+id/action_navDashboardFragment_to_navResultCreateFragment"
+            app:destination="@id/navResultCreateFragment" />
     </fragment>
 
     <fragment
@@ -50,5 +53,11 @@
             app:argType="long"
             android:defaultValue="0L" />
     </fragment>
+
+    <fragment
+        android:id="@id/navResultCreateFragment"
+        android:name="com.jasperanelechukwu.android.courseadvizor.ui.fragments.ResultCreateFragment"
+        android:label="@string/add_result"
+        tools:layout="@layout/fragment_result_create" />
 
 </navigation>

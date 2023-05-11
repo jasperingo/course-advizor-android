@@ -6,6 +6,7 @@
     <item type="id" name="navStudentsFragment" />
     <item type="id" name="navResultFragment" />
     <item type="id" name="navResultsFragment" />
+    <item type="id" name="navResultCreateFragment" />
     <item type="id" name="navReportsFragment" />
     <item type="id" name="navAppointmentsFragment" />
     <item type="id" name="navAuthMainFragment" />
@@ -51,6 +52,8 @@
     <item type="id" name="session_spinner" />
     <item type="id" name="department_spinner" />
 
+    <item type="id" name="course_code_edit_text" />
+
     <item type="id" name="avatar_image_view" />
     <item type="id" name="avatar_select_button" />
     <item type="id" name="full_name_text_view" />
@@ -63,5 +66,7 @@
 
     <item type="id" name="students_list_view" />
     <item type="id" name="results_list_view" />
+
+    <item type="id" name="add_result_button" />
 
 </resources>

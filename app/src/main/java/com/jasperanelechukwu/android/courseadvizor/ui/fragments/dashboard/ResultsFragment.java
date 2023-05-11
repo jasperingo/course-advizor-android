@@ -12,9 +12,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.jasperanelechukwu.android.courseadvizor.R;
+import com.jasperanelechukwu.android.courseadvizor.databinding.FragmentResultsBinding;
 import com.jasperanelechukwu.android.courseadvizor.ui.adapters.ResultListAdapter;
 import com.jasperanelechukwu.android.courseadvizor.viewmodels.ResultsViewModel;
 
@@ -22,14 +22,17 @@ import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class ResultsFragment extends Fragment {
+    private FragmentResultsBinding binding;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_results, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        binding = FragmentResultsBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
@@ -57,10 +60,10 @@ public class ResultsFragment extends Fragment {
             }
         });
 
-        RecyclerView recyclerView = view.findViewById(R.id.results_list_view);
+        binding.addResultButton.setOnClickListener(viewB -> parentNavController.navigate(R.id.action_navDashboardFragment_to_navResultCreateFragment));
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.resultsListView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        recyclerView.setAdapter(listAdapter);
+        binding.resultsListView.setAdapter(listAdapter);
     }
 }

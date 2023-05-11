@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@id/results_list_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/dimen_md"
-    android:clipToPadding="false"
-    android:scrollbarStyle="outsideOverlay"
-    tools:itemCount="5"
-    tools:listitem="@layout/view_holder_result_item"
-    tools:context=".ui.fragments.dashboard.ResultsFragment"
-    />
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@id/results_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingBottom="@dimen/dimen_md"
+            android:clipToPadding="false"
+            android:scrollbarStyle="outsideOverlay"
+            tools:itemCount="5"
+            tools:listitem="@layout/view_holder_result_item"
+            tools:context=".ui.fragments.dashboard.ResultsFragment"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@id/add_result_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="16dp"
+            android:src="@drawable/add_result_24"
+            android:contentDescription="@string/add_result"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="?attr/colorPrimary"
+            />
+
+    </RelativeLayout>
+</layout>
