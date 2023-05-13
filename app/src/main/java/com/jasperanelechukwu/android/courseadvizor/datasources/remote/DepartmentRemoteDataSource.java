@@ -2,7 +2,7 @@ package com.jasperanelechukwu.android.courseadvizor.datasources.remote;
 
 import com.jasperanelechukwu.android.courseadvizor.datasources.webservices.DepartmentWebService;
 import com.jasperanelechukwu.android.courseadvizor.datasources.webservices.WebService;
-import com.jasperanelechukwu.android.courseadvizor.entities.Department;
+import com.jasperanelechukwu.android.courseadvizor.entities.remote.DepartmentDto;
 import com.jasperanelechukwu.android.courseadvizor.exceptions.RemoteDataSourceException;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class DepartmentRemoteDataSource {
         departmentWebService = webService.getDepartmentWebService();
     }
 
-    public Single<List<Department>> getAll() {
+    public Single<List<DepartmentDto>> getAll() {
         return departmentWebService.getAll().map((response) -> {
             if (response.isSuccessful() && response.body() != null) {
                 return response.body().getData();

@@ -17,6 +17,7 @@ public class Session {
     private int endedAt;
 
     @NonNull
+    @Override
     public String toString() {
         return id == 0 ? "" : startedAt+"/"+endedAt;
     }
