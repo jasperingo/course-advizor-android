@@ -51,6 +51,7 @@
     <item type="id" name="pin_edit_text" />
     <item type="id" name="session_spinner" />
     <item type="id" name="department_spinner" />
+    <item type="id" name="semester_spinner" />
 
     <item type="id" name="course_code_edit_text" />
 

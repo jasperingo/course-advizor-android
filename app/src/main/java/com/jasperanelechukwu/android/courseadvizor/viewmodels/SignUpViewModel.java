@@ -134,7 +134,7 @@ public class SignUpViewModel extends ViewModel {
 
         departmentsAndSessionsDisposable = Single.zip(
             departmentRepository.getAllDepartments(),
-            sessionRepository.getAllSessions(),
+            sessionRepository.getAllSessions().firstElement().toSingle(),
             (departments, sessions) -> {
                 sessions.add(0, new Session());
                 departments.add(0, new Department());

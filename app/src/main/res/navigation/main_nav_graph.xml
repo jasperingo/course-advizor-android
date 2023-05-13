@@ -58,6 +58,11 @@
         android:id="@id/navResultCreateFragment"
         android:name="com.jasperanelechukwu.android.courseadvizor.ui.fragments.ResultCreateFragment"
         android:label="@string/add_result"
-        tools:layout="@layout/fragment_result_create" />
+        tools:layout="@layout/fragment_result_create" >
+        <action
+            android:id="@+id/action_navResultCreateFragment_to_navResultFragment"
+            app:destination="@id/navResultFragment"
+            app:popUpTo="@id/navDashboardFragment" />
+    </fragment>
 
 </navigation>

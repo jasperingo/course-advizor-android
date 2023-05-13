@@ -5,9 +5,16 @@ import com.jasperanelechukwu.android.courseadvizor.datasources.remote.ResultRemo
 import com.jasperanelechukwu.android.courseadvizor.entities.Result;
 import com.jasperanelechukwu.android.courseadvizor.entities.local.ResultEntity;
 import com.jasperanelechukwu.android.courseadvizor.entities.local.ResultEntityAndSessionEntity;
+import com.jasperanelechukwu.android.courseadvizor.entities.remote.CreateResultDto;
 import com.jasperanelechukwu.android.courseadvizor.entities.remote.ResultDto;
+import com.jasperanelechukwu.android.courseadvizor.entities.ui.CreateResultFormUiState;
+import com.jasperanelechukwu.android.courseadvizor.exceptions.InvalidCreateResultException;
+import com.jasperanelechukwu.android.courseadvizor.exceptions.InvalidFormException;
+import com.jasperanelechukwu.android.courseadvizor.exceptions.RemoteDataSourceException;
+import com.jasperanelechukwu.android.courseadvizor.exceptions.RepositoryException;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -37,6 +44,56 @@ public class ResultRepository {
         return resultsList;
     }
 
+    public Single<Result> create(final CreateResultFormUiState createResultFormUiState, final long authId) {
+        final InvalidFormException.InputErrorList inputErrors = new InvalidFormException.InputErrorList();
+
+        if (createResultFormUiState.getCourseCode() == null || createResultFormUiState.getCourseCode().trim().isEmpty()) {
+            inputErrors.addInputRequired("course_code", createResultFormUiState.getCourseCode());
+        } else if (!createResultFormUiState.getCourseCode().matches("^[A-Z]{3}\\d{3}$")) {
+            inputErrors.addInputInvalid("course_code", createResultFormUiState.getCourseCode());
+        }
+
+        if (createResultFormUiState.getSemester() == null) {
+            inputErrors.addInputRequired("semester", createResultFormUiState.getSemester());
+        }
+
+        if (createResultFormUiState.getSession() == null || createResultFormUiState.getSession().getId() == 0) {
+            inputErrors.addInputRequired("session_id", createResultFormUiState.getSession().getId());
+        }
+
+        if (inputErrors.hasError()) {
+            return Single.error(new InvalidCreateResultException("Client validation", inputErrors));
+        }
+
+        final CreateResultDto resultDto = new CreateResultDto(
+            createResultFormUiState.getCourseCode(),
+            createResultFormUiState.getSemester(),
+            createResultFormUiState.getSession().getId()
+        );
+
+        return resultRemoteDataSource.create(resultDto, authId)
+            .subscribeOn(Schedulers.io())
+            .onErrorResumeNext(throwable -> {
+                if (throwable instanceof InvalidFormException) {
+                    final InvalidFormException formException = (InvalidFormException) throwable;
+                    return Single.error(new InvalidCreateResultException(formException.getMessage(), formException.getInputErrors()));
+                }
+
+                return Single.error(throwable);
+            })
+            .flatMap(resultDto1 ->
+                resultLocalDataSource.createAll(Collections.singletonList(resultDto1.toResultEntity()))
+                    .ignoreElement()
+                    .andThen(
+                        Single.just(
+                            resultDto1
+                            .toResultEntity()
+                            .toResult(resultDto1.getSession().toSessionEntity().toSession())
+                        )
+                    )
+            );
+    }
+
     public Flowable<List<Result>> getAllResults(final long authId) {
         final Single<List<ResultDto>> remoteResults = resultRemoteDataSource.getAll(authId).subscribeOn(Schedulers.io());
 
@@ -59,6 +116,13 @@ public class ResultRepository {
                     .ignoreElement()
                     .andThen(resultLocalDataSource.getAll())
                     .map(this::convertResultEntityAndSessionEntityToResult);
+            })
+            .onErrorResumeNext(throwable -> {
+                if (throwable instanceof RemoteDataSourceException) {
+                    return Flowable.error(new RepositoryException(((RemoteDataSourceException) throwable).getData().getMessage()));
+                }
+
+                return Flowable.error(throwable);
             })
             .subscribeOn(Schedulers.io());
     }
