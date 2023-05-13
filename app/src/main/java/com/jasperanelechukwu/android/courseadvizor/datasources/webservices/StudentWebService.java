@@ -1,7 +1,7 @@
 package com.jasperanelechukwu.android.courseadvizor.datasources.webservices;
 
-import com.jasperanelechukwu.android.courseadvizor.entities.Student;
 import com.jasperanelechukwu.android.courseadvizor.entities.remote.ResponseDto;
+import com.jasperanelechukwu.android.courseadvizor.entities.remote.StudentDto;
 
 import java.util.List;
 
@@ -12,5 +12,5 @@ import retrofit2.http.Header;
 
 public interface StudentWebService {
     @GET("student")
-    Single<Response<ResponseDto<List<Student>>>> getAll(@Header("Authorization") String authId);
+    Single<Response<ResponseDto<List<StudentDto>>>> getAll(@Header("Authorization") String authId);
 }

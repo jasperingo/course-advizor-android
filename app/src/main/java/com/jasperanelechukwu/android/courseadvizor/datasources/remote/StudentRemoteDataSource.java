@@ -2,7 +2,7 @@ package com.jasperanelechukwu.android.courseadvizor.datasources.remote;
 
 import com.jasperanelechukwu.android.courseadvizor.datasources.webservices.StudentWebService;
 import com.jasperanelechukwu.android.courseadvizor.datasources.webservices.WebService;
-import com.jasperanelechukwu.android.courseadvizor.entities.Student;
+import com.jasperanelechukwu.android.courseadvizor.entities.remote.StudentDto;
 import com.jasperanelechukwu.android.courseadvizor.exceptions.RemoteDataSourceException;
 
 import java.util.List;
@@ -22,7 +22,7 @@ public class StudentRemoteDataSource {
         studentWebService = webService.getStudentWebService();
     }
 
-    public Single<List<Student>> getAll(final long authId) {
+    public Single<List<StudentDto>> getAll(final long authId) {
         return studentWebService.getAll(String.valueOf(authId)).map((response) -> {
             if (response.isSuccessful() && response.body() != null) {
                 return response.body().getData();

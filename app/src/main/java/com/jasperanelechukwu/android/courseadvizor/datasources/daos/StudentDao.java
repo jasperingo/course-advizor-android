@@ -5,6 +5,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.jasperanelechukwu.android.courseadvizor.entities.Student;
+import com.jasperanelechukwu.android.courseadvizor.entities.local.StudentEntity;
 
 import java.util.List;
 
@@ -14,8 +15,9 @@ import io.reactivex.rxjava3.core.Single;
 @Dao
 public interface StudentDao {
     @Insert
-    Single<List<Long>> insertAll(List<Student> students);
+    Single<List<Long>> insertAll(List<StudentEntity> students);
+
 
     @Query("SELECT * FROM student")
-    Flowable<List<Student>> getAll();
+    Flowable<List<StudentEntity>> getAll();
 }
