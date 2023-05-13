@@ -4,7 +4,6 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
-import com.jasperanelechukwu.android.courseadvizor.entities.Student;
 import com.jasperanelechukwu.android.courseadvizor.entities.local.StudentEntity;
 
 import java.util.List;
