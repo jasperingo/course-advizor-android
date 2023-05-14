@@ -1,12 +1,16 @@
 package com.jasperanelechukwu.android.courseadvizor.repositories;
 
+import androidx.room.rxjava3.EmptyResultSetException;
+
 import com.jasperanelechukwu.android.courseadvizor.datasources.local.ResultLocalDataSource;
 import com.jasperanelechukwu.android.courseadvizor.datasources.remote.ResultRemoteDataSource;
 import com.jasperanelechukwu.android.courseadvizor.entities.Result;
+import com.jasperanelechukwu.android.courseadvizor.entities.StudentWithResult;
 import com.jasperanelechukwu.android.courseadvizor.entities.local.ResultEntity;
 import com.jasperanelechukwu.android.courseadvizor.entities.local.ResultEntityAndSessionEntity;
 import com.jasperanelechukwu.android.courseadvizor.entities.remote.CreateResultDto;
 import com.jasperanelechukwu.android.courseadvizor.entities.remote.ResultDto;
+import com.jasperanelechukwu.android.courseadvizor.entities.remote.StudentWithResultDto;
 import com.jasperanelechukwu.android.courseadvizor.entities.ui.CreateResultFormUiState;
 import com.jasperanelechukwu.android.courseadvizor.exceptions.InvalidCreateResultException;
 import com.jasperanelechukwu.android.courseadvizor.exceptions.InvalidFormException;
@@ -74,6 +78,10 @@ public class ResultRepository {
         return resultRemoteDataSource.create(resultDto, authId)
             .subscribeOn(Schedulers.io())
             .onErrorResumeNext(throwable -> {
+                if (throwable instanceof RemoteDataSourceException) {
+                    return Single.error(RepositoryException.from((RemoteDataSourceException) throwable));
+                }
+
                 if (throwable instanceof InvalidFormException) {
                     final InvalidFormException formException = (InvalidFormException) throwable;
                     return Single.error(new InvalidCreateResultException(formException.getMessage(), formException.getInputErrors()));
@@ -119,10 +127,54 @@ public class ResultRepository {
             })
             .onErrorResumeNext(throwable -> {
                 if (throwable instanceof RemoteDataSourceException) {
-                    return Flowable.error(new RepositoryException(((RemoteDataSourceException) throwable).getData().getMessage()));
+                    return Flowable.error(RepositoryException.from((RemoteDataSourceException) throwable));
                 }
 
                 return Flowable.error(throwable);
+            })
+            .subscribeOn(Schedulers.io());
+    }
+
+    public Single<Result> getOneResult(final long id, final long authId) {
+        final Single<ResultDto> remoteResult = resultRemoteDataSource.getOne(id, authId).subscribeOn(Schedulers.io());
+
+        return resultLocalDataSource.getOne(id)
+            .map(ResultEntityAndSessionEntity::toResult)
+            .onErrorResumeNext(throwable -> {
+                if (throwable instanceof EmptyResultSetException) {
+                    return remoteResult
+                        .flatMap(resultDto -> resultLocalDataSource.createAll(Collections.singletonList(resultDto.toResultEntity())))
+                        .ignoreElement()
+                        .andThen(resultLocalDataSource.getOne(id))
+                        .map(ResultEntityAndSessionEntity::toResult);
+                }
+
+                if (throwable instanceof RemoteDataSourceException) {
+                    return Single.error(RepositoryException.from((RemoteDataSourceException) throwable));
+                }
+
+                return Single.error(throwable);
+            })
+            .subscribeOn(Schedulers.io());
+    }
+
+    public Single<List<StudentWithResult>> getOneResultStudents(final long id, final long authId) {
+        return resultRemoteDataSource.getOneStudents(id, authId)
+            .map(studentWithResultDtoList -> {
+                final List<StudentWithResult> studentWithResults = new ArrayList<>();
+
+                for (StudentWithResultDto dto: studentWithResultDtoList) {
+                    studentWithResults.add(dto.toStudentWithResult());
+                }
+
+                return studentWithResults;
+            })
+            .onErrorResumeNext(throwable -> {
+                if (throwable instanceof RemoteDataSourceException) {
+                    return Single.error(RepositoryException.from((RemoteDataSourceException) throwable));
+                }
+
+                return Single.error(throwable);
             })
             .subscribeOn(Schedulers.io());
     }

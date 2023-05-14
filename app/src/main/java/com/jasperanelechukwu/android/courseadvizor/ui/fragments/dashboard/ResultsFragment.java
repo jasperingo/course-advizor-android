@@ -52,7 +52,7 @@ public class ResultsFragment extends Fragment {
             }
         );
 
-        viewModel.getStudentsUiState().observe(getViewLifecycleOwner(), resultsUiState -> {
+        viewModel.getResultsUiState().observe(getViewLifecycleOwner(), resultsUiState -> {
             listAdapter.setUiState(resultsUiState);
 
             if (!resultsUiState.isLoaded() && !resultsUiState.isLoading() && resultsUiState.getError() == null) {

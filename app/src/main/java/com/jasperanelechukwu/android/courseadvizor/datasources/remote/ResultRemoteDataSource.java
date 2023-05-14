@@ -4,6 +4,7 @@ import com.jasperanelechukwu.android.courseadvizor.datasources.webservices.Resul
 import com.jasperanelechukwu.android.courseadvizor.datasources.webservices.WebService;
 import com.jasperanelechukwu.android.courseadvizor.entities.remote.CreateResultDto;
 import com.jasperanelechukwu.android.courseadvizor.entities.remote.ResultDto;
+import com.jasperanelechukwu.android.courseadvizor.entities.remote.StudentWithResultDto;
 import com.jasperanelechukwu.android.courseadvizor.exceptions.InvalidFormException;
 import com.jasperanelechukwu.android.courseadvizor.exceptions.RemoteDataSourceException;
 
@@ -45,6 +46,30 @@ public class ResultRemoteDataSource {
             } else {
                 throw new RemoteDataSourceException(
                     webService.convertErrorBody(response, RemoteDataSourceException.RemoteDataSourceError.class)
+                );
+            }
+        });
+    }
+
+    public Single<ResultDto> getOne(final long id, final long authId) {
+        return resultWebService.getOne(id, String.valueOf(authId)).map((response) -> {
+            if (response.isSuccessful() && response.body() != null) {
+                return response.body().getData();
+            } else {
+                throw new RemoteDataSourceException(
+                        webService.convertErrorBody(response, RemoteDataSourceException.RemoteDataSourceError.class)
+                );
+            }
+        });
+    }
+
+    public Single<List<StudentWithResultDto>> getOneStudents(final long id, final long authId) {
+        return resultWebService.getOneStudents(id, String.valueOf(authId)).map((response) -> {
+            if (response.isSuccessful() && response.body() != null) {
+                return response.body().getData();
+            } else {
+                throw new RemoteDataSourceException(
+                        webService.convertErrorBody(response, RemoteDataSourceException.RemoteDataSourceError.class)
                 );
             }
         });

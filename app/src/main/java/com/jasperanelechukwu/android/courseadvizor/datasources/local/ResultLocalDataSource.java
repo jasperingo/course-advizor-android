@@ -27,4 +27,8 @@ public class ResultLocalDataSource {
     public Flowable<List<ResultEntityAndSessionEntity>> getAll() {
         return resultDao.getAll();
     }
+
+    public Single<ResultEntityAndSessionEntity> getOne(long id) {
+        return resultDao.getOne(id);
+    }
 }

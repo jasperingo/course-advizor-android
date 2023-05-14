@@ -9,6 +9,8 @@ import com.jasperanelechukwu.android.courseadvizor.entities.remote.CreateCourseA
 import com.jasperanelechukwu.android.courseadvizor.exceptions.InvalidFormException;
 import com.jasperanelechukwu.android.courseadvizor.exceptions.InvalidSignInFormException;
 import com.jasperanelechukwu.android.courseadvizor.exceptions.InvalidSignUpFormException;
+import com.jasperanelechukwu.android.courseadvizor.exceptions.RemoteDataSourceException;
+import com.jasperanelechukwu.android.courseadvizor.exceptions.RepositoryException;
 
 import javax.inject.Inject;
 
@@ -70,6 +72,10 @@ public class CourseAdviserRepository {
         return courseAdviserRemoteDataSource.create(dto)
             .subscribeOn(Schedulers.io())
             .onErrorResumeNext(throwable -> {
+                if (throwable instanceof RemoteDataSourceException) {
+                    return Single.error(RepositoryException.from((RemoteDataSourceException) throwable));
+                }
+
                 if (throwable instanceof InvalidFormException) {
                     final InvalidFormException formException = (InvalidFormException) throwable;
                     return Single.error(new InvalidSignUpFormException(formException.getMessage(), formException.getInputErrors()));
@@ -106,6 +112,10 @@ public class CourseAdviserRepository {
         return courseAdviserRemoteDataSource.auth(dto)
             .subscribeOn(Schedulers.io())
             .onErrorResumeNext(throwable -> {
+                if (throwable instanceof RemoteDataSourceException) {
+                    return Single.error(RepositoryException.from((RemoteDataSourceException) throwable));
+                }
+
                 if (throwable instanceof InvalidFormException) {
                     final InvalidFormException formException = (InvalidFormException) throwable;
                     return Single.error(new InvalidSignInFormException(formException.getMessage(), formException.getInputErrors()));

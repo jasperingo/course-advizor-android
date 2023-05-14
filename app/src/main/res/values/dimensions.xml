@@ -2,6 +2,8 @@
 <resources>
     <dimen name="dimen_text_xl">42sp</dimen>
     <dimen name="dimen_text_lg">28sp</dimen>
+    <dimen name="dimen_text_3md">21sp</dimen>
+    <dimen name="dimen_text_2md">18sp</dimen>
     <dimen name="dimen_text_md">14sp</dimen>
     <dimen name="dimen_text_sm">7sp</dimen>
 

@@ -30,7 +30,7 @@ public class ResultsViewModel extends ViewModel {
         this.resultRepository = resultRepository;
     }
 
-    public LiveData<ResultsUiState> getStudentsUiState() {
+    public LiveData<ResultsUiState> getResultsUiState() {
         if (resultsUiState.getValue() == null) {
             resultsUiState.setValue(new ResultsUiState());
         }

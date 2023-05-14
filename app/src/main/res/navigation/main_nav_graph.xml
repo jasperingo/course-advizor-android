@@ -52,17 +52,24 @@
             android:name="resultId"
             app:argType="long"
             android:defaultValue="0L" />
+        <action
+            android:id="@+id/action_navResultFragment_to_navStudentResultEditDialog"
+            app:destination="@id/navStudentResultEditDialog" />
     </fragment>
 
     <fragment
         android:id="@id/navResultCreateFragment"
         android:name="com.jasperanelechukwu.android.courseadvizor.ui.fragments.ResultCreateFragment"
         android:label="@string/add_result"
-        tools:layout="@layout/fragment_result_create" >
+        tools:layout="@layout/fragment_result_create">
         <action
             android:id="@+id/action_navResultCreateFragment_to_navResultFragment"
             app:destination="@id/navResultFragment"
             app:popUpTo="@id/navDashboardFragment" />
     </fragment>
+
+    <dialog
+        android:id="@+id/navStudentResultEditDialog"
+        android:name="com.jasperanelechukwu.android.courseadvizor.ui.dialogs.StudentResultEditDialogFragment" />
 
 </navigation>
