@@ -43,6 +43,8 @@ public class StudentResultListAdapter extends RecyclerView.Adapter<RecyclerView.
 
         if (hasExtraOneItem()) {
             notifyItemChanged(0);
+        } else if (uiState.getStudentsItemChanged() >= 0) {
+            notifyItemChanged(uiState.getStudentsItemChanged());
         } else {
             notifyItemRemoved(0);
             notifyItemRangeInserted(0, uiState.getStudents().size());

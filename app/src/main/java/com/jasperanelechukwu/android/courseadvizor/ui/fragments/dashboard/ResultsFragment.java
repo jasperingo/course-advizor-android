@@ -46,7 +46,7 @@ public class ResultsFragment extends Fragment {
         final ResultListAdapter listAdapter = new ResultListAdapter(
             view1 -> viewModel.fetchResults(),
             result -> {
-                Bundle bundle = new Bundle();
+                final Bundle bundle = new Bundle();
                 bundle.putLong("resultId", result.getId());
                 parentNavController.navigate(R.id.action_navDashboardFragment_to_navResultFragment, bundle);
             }

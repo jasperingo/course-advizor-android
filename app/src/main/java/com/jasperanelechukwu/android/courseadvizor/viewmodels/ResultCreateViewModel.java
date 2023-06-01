@@ -1,7 +1,5 @@
 package com.jasperanelechukwu.android.courseadvizor.viewmodels;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -101,8 +99,6 @@ public class ResultCreateViewModel extends ViewModel {
             .subscribe(
                 result -> createResultUiState.setValue(new CreateResultUiState(result)),
                 throwable -> {
-                    Log.e("Create result error", throwable.getMessage(), throwable);
-
                     if (throwable instanceof InvalidCreateResultException) {
                         InvalidCreateResultException exception = (InvalidCreateResultException) throwable;
 

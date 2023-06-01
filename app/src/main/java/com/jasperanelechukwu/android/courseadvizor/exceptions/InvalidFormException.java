@@ -96,6 +96,10 @@ public class InvalidFormException extends Exception {
             switch (errorCode) {
                 case COURSE_ADVISER_WITH_SESSION_ID_AND_DEPARTMENT_ID_EXISTS:
                     return R.string.course_adviser_with_session_and_department_already_exists;
+                case STUDENT_RESULT_STUDENT_AND_RESULT_ID_EXISTS:
+                    return R.string.student_result_with_student_and_result_id_already_exists;
+                case RESULT_WITH_COURSE_CODE_SESSION_ID_AND_SEMESTER_EXISTS:
+                    return R.string.result_with_course_code_session_id_and_semester_already_exists;
                 case FIELD_REQUIRED:
                     return R.string.this_field_is_required;
                 case FIELD_DO_NOT_EXIST:

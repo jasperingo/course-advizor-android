@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_main);
 
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
+        final NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.main_nav_host_fragment);
 
         CourseAdviser courseAdviser = new CourseAdviser();

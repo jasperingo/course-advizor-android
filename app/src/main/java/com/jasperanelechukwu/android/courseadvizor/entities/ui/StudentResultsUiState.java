@@ -19,19 +19,25 @@ public class StudentResultsUiState {
 
     private boolean loaded;
 
+    private int studentsItemChanged;
+
     public StudentResultsUiState() {
-        this(new ArrayList<>(), false, null, false);
+        this(new ArrayList<>(), false, null, false, -1);
     }
 
     public StudentResultsUiState(boolean loading) {
-        this(new ArrayList<>(), loading, null, false);
+        this(new ArrayList<>(), loading, null, false, -1);
     }
 
     public StudentResultsUiState(String error) {
-        this(new ArrayList<>(), false, error, false);
+        this(new ArrayList<>(), false, error, false, -1);
     }
 
     public StudentResultsUiState(List<StudentWithResult> students, boolean loaded) {
-        this(students, false, null, loaded);
+        this(students, false, null, loaded, -1);
+    }
+
+    public StudentResultsUiState(List<StudentWithResult> students, int studentsItemChanged) {
+        this(students, false, null, true, studentsItemChanged);
     }
 }

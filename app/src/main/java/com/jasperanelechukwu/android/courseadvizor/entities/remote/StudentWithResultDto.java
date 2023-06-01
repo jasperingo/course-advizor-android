@@ -26,14 +26,4 @@ public class StudentWithResultDto extends StudentDto {
         return new StudentWithResult(getId(), getFirstName(), getLastName(), getMatriculationNumber(), getPhoneNumber(), getCreatedAt(), results);
     }
 
-    @Data
-    public static class StudentResultDto {
-        private long id;
-
-        private StudentResult.Grade grade;
-
-        public StudentResult toStudentResult() {
-            return new StudentResult(id, grade);
-        }
-    }
 }

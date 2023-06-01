@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +20,7 @@ import com.jasperanelechukwu.android.courseadvizor.R;
 import com.jasperanelechukwu.android.courseadvizor.databinding.FragmentResultBinding;
 import com.jasperanelechukwu.android.courseadvizor.ui.adapters.StudentResultListAdapter;
 import com.jasperanelechukwu.android.courseadvizor.viewmodels.ResultViewModel;
+import com.jasperanelechukwu.android.courseadvizor.viewmodels.StudentResultModifyViewModel;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -27,6 +29,8 @@ public class ResultFragment extends Fragment {
     public static final String ARG_ID_KEY = "resultId";
 
     private FragmentResultBinding binding;
+
+    private ResultViewModel viewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,14 @@ public class ResultFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        final Bundle arguments = requireArguments();
+
+        final long id = arguments.getLong(ARG_ID_KEY);
+
+        binding.setId(id);
+
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+
         final NavController navController = NavHostFragment.findNavController(this);
 
         NavigationUI.setupWithNavController(
@@ -51,25 +63,11 @@ public class ResultFragment extends Fragment {
             new AppBarConfiguration.Builder(navController.getGraph()).build()
         );
 
-        final ResultViewModel viewModel = new ViewModelProvider(this).get(ResultViewModel.class);
-
-        viewModel.setNoIdErrorMessage(getResources().getString(R.string.no_result_id_set));
+        viewModel = new ViewModelProvider(requireActivity()).get(ResultViewModel.class);
 
         binding.setViewModel(viewModel);
 
-        binding.setLifecycleOwner(getViewLifecycleOwner());
-
-        final Bundle arguments = getArguments();
-
-        if (arguments == null) {
-            viewModel.fetchResult(0);
-            binding.setId(0L);
-            return;
-        }
-
-        final long id = arguments.getLong(ARG_ID_KEY);
-
-        binding.setId(id);
+        viewModel.setNoIdErrorMessage(getResources().getString(R.string.no_result_id_set));
 
         viewModel.getResultUiState().observe(getViewLifecycleOwner(), resultUiState -> {
             if (resultUiState.getResult() == null && !resultUiState.isLoading() && resultUiState.getError() == null) {
@@ -79,9 +77,26 @@ public class ResultFragment extends Fragment {
             }
         });
 
+        new ViewModelProvider(requireActivity()).get(StudentResultModifyViewModel.class)
+        .getModifyStudentResultUiState()
+        .observe(getViewLifecycleOwner(), modifyStudentResultUiState -> {
+            if (modifyStudentResultUiState.getStudentResult() != null) {
+                Toast.makeText(requireContext(), R.string.student_result_modified, Toast.LENGTH_LONG).show();
+                viewModel.updateStudentResultsAfterModification(modifyStudentResultUiState.getStudentId(), modifyStudentResultUiState.getStudentResult());
+            } else if (modifyStudentResultUiState.getError() != null) {
+                Toast.makeText(requireContext(), modifyStudentResultUiState.getError(), Toast.LENGTH_LONG).show();
+            } else if (modifyStudentResultUiState.getFormError() != 0) {
+                Toast.makeText(requireContext(), modifyStudentResultUiState.getFormError(), Toast.LENGTH_LONG).show();
+            }
+        });
+
         final StudentResultListAdapter listAdapter = new StudentResultListAdapter(
             view1 -> viewModel.fetchStudentResults(id),
-            studentWithResult -> navController.navigate(R.id.action_navResultFragment_to_navStudentResultEditDialog)
+            studentWithResult -> {
+                final Bundle bundle = new Bundle();
+                bundle.putLong("studentId", studentWithResult.getId());
+                navController.navigate(R.id.action_navResultFragment_to_navStudentResultEditDialog, bundle);
+            }
         );
 
         viewModel.getStudentResultsUiState().observe(getViewLifecycleOwner(), listAdapter::setUiState);
@@ -89,5 +104,11 @@ public class ResultFragment extends Fragment {
         binding.studentsListView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         binding.studentsListView.setAdapter(listAdapter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        viewModel.resetUiStates();
     }
 }

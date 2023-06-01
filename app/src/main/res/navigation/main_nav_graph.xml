@@ -70,6 +70,11 @@
 
     <dialog
         android:id="@+id/navStudentResultEditDialog"
-        android:name="com.jasperanelechukwu.android.courseadvizor.ui.dialogs.StudentResultEditDialogFragment" />
+        android:name="com.jasperanelechukwu.android.courseadvizor.ui.dialogs.StudentResultEditDialogFragment">
+        <argument
+            android:name="studentId"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </dialog>
 
 </navigation>

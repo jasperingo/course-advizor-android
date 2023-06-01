@@ -4,10 +4,15 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.jasperanelechukwu.android.courseadvizor.entities.StudentResult;
+import com.jasperanelechukwu.android.courseadvizor.entities.StudentWithResult;
 import com.jasperanelechukwu.android.courseadvizor.entities.ui.ResultUiState;
 import com.jasperanelechukwu.android.courseadvizor.entities.ui.StudentResultsUiState;
 import com.jasperanelechukwu.android.courseadvizor.repositories.ResultRepository;
 import com.jasperanelechukwu.android.courseadvizor.utils.AppStore;
+
+import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -49,6 +54,35 @@ public class ResultViewModel extends ViewModel {
         }
 
         return studentResultsUiState;
+    }
+
+    public void resetUiStates() {
+        resultUiState.setValue(new ResultUiState());
+        studentResultsUiState.setValue(new StudentResultsUiState());
+    }
+
+    public void updateStudentResultsAfterModification(final long studentId, final StudentResult studentResult) {
+        final List<StudentWithResult> students = Objects.requireNonNull(studentResultsUiState.getValue()).getStudents();
+
+        int indexOfChange = -1;
+
+        for (int i = 0; i < students.size(); i++) {
+            StudentWithResult studentWithResult = students.get(i);
+            if (studentWithResult.getId() == studentId) {
+                indexOfChange = i;
+
+                if (studentWithResult.getStudentResults().size() > 0) {
+                    studentWithResult.getStudentResults().set(0, studentResult);
+                } else {
+                    studentWithResult.getStudentResults().add(studentResult);
+                }
+
+                students.set(i, studentWithResult);
+                break;
+            }
+        }
+
+        studentResultsUiState.setValue(new StudentResultsUiState(students, indexOfChange));
     }
 
     public void setNoIdErrorMessage(String errorMessage) {

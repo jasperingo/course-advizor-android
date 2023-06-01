@@ -3,7 +3,6 @@ package com.jasperanelechukwu.android.courseadvizor;
 import android.app.Application;
 import android.util.Log;
 
-import java.io.IOException;
 import java.util.Objects;
 
 import dagger.hilt.android.HiltAndroidApp;

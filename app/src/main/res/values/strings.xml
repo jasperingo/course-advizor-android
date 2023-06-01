@@ -38,6 +38,8 @@
     <string name="this_field_do_not_exist">This field do not exist</string>
     <string name="this_field_already_exists">This field already exists</string>
     <string name="course_adviser_with_session_and_department_already_exists">Course adviser with session and department already exists</string>
+    <string name="student_result_with_student_and_result_id_already_exists">Student result with student and result id already exists</string>
+    <string name="result_with_course_code_session_id_and_semester_already_exists">Result with course code, session id and semester already exists</string>
 
     <string name="no_result_id_set">A result ID was not set</string>
     <string name="no_student_found">No student found</string>
@@ -45,12 +47,15 @@
 
     <string name="select_image">Select image</string>
 
+    <string name="student_result_modified">Student result has been modified</string>
+
     <string name="semester__format">%1$s semester</string>
     <string name="grade__format">Grade: %1$s</string>
     <string name="session__format">%1$s session</string>
 
     <string-array name="grades">
         <item>A</item>
+        <item>B</item>
         <item>C</item>
         <item>D</item>
         <item>E</item>

@@ -99,7 +99,7 @@
             android:errorText="@{viewModel.sessionsUiState.error}"
             android:retryClickListener="@{() -> viewModel.fetchSessions()}"
             android:visibility="@{viewModel.sessionsUiState.error != null ? View.VISIBLE : View.GONE}"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tool_bar"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             />
@@ -110,7 +110,7 @@
             android:layout_gravity="center"
             android:padding="@dimen/dimen_md"
             android:visibility="@{viewModel.sessionsUiState.loading ? View.VISIBLE : View.GONE}"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tool_bar"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             />
