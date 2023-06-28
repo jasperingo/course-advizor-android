@@ -6,8 +6,6 @@
     tools:context=".ui.fragments.auth.SignInFragment">
 
     <data>
-        <import type="android.view.View" />
-
         <variable
             name="viewModel"
             type="com.jasperanelechukwu.android.courseadvizor.viewmodels.SignInViewModel" />

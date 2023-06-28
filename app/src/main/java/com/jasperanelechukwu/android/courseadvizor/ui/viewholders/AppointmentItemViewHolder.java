@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.jasperanelechukwu.android.courseadvizor.databinding.ViewHolderAppointmentItemBinding;
 import com.jasperanelechukwu.android.courseadvizor.entities.Appointment;
 
+import java.util.function.Consumer;
+
 public class AppointmentItemViewHolder extends RecyclerView.ViewHolder {
     private final ViewHolderAppointmentItemBinding binding;
 
@@ -18,7 +20,7 @@ public class AppointmentItemViewHolder extends RecyclerView.ViewHolder {
         binding.setAppointment(appointment);
     }
 
-//    public void setClickListener(Consumer<Result> clickListener) {
-//        binding.setClickListener(clickListener);
-//    }
+    public void setClickListener(Consumer<Appointment> clickListener) {
+        binding.setClickListener(clickListener);
+    }
 }

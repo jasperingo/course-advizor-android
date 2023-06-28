@@ -74,7 +74,7 @@ public class AppointmentListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
             ((EmptyListViewHolder) holder).setMessage(R.string.no_appointment_found);
         } else if (holder instanceof AppointmentItemViewHolder) {
             AppointmentItemViewHolder itemViewHolder = (AppointmentItemViewHolder) holder;
-//            itemViewHolder.setClickListener(itemClickListener);
+            itemViewHolder.setClickListener(itemClickListener);
             itemViewHolder.setAppointment(uiState.getAppointments().get(position));
         }
     }

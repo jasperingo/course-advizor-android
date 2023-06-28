@@ -13,6 +13,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.jasperanelechukwu.android.courseadvizor.R;
 import com.jasperanelechukwu.android.courseadvizor.databinding.FragmentAppointmentsBinding;
 import com.jasperanelechukwu.android.courseadvizor.ui.adapters.AppointmentListAdapter;
 import com.jasperanelechukwu.android.courseadvizor.viewmodels.AppointmentsViewModel;
@@ -38,13 +39,13 @@ public class AppointmentsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final NavController parentNavController = NavHostFragment.findNavController(requireParentFragment().requireParentFragment());
+        final NavController navController = NavHostFragment.findNavController(this);
 
         final AppointmentsViewModel viewModel = new ViewModelProvider(this).get(AppointmentsViewModel.class);
 
         final AppointmentListAdapter listAdapter = new AppointmentListAdapter(
             view1 -> viewModel.fetchAppointments(),
-            appointment -> {}
+            appointment -> navController.navigate(R.id.action_navAppointmentsFragment_to_navAppointmentEditDialog)
         );
 
         viewModel.getAppointmentsUiState().observe(getViewLifecycleOwner(), resultsUiState -> {
