@@ -44,11 +44,15 @@
     <string name="no_result_id_set">A result ID was not set</string>
     <string name="no_student_found">No student found</string>
     <string name="no_result_found">No result found</string>
+    <string name="no_appointment_found">No appointment found</string>
+    <string name="date_not_fixed">Date not fixed</string>
 
     <string name="select_image">Select image</string>
 
     <string name="student_result_modified">Student result has been modified</string>
 
+    <string name="meeting_date__format">Meeting date: %1$s</string>
+    <string name="request_date__format">Request date: %1$s</string>
     <string name="semester__format">%1$s semester</string>
     <string name="grade__format">Grade: %1$s</string>
     <string name="session__format">%1$s session</string>

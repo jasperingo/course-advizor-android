@@ -71,9 +71,12 @@
     <item type="id" name="semester_text_view" />
     <item type="id" name="grade_text_view" />
     <item type="id" name="matriculation_number_text_view" />
+    <item type="id" name="start_date_text_view" />
+    <item type="id" name="creation_date_text_view" />
 
     <item type="id" name="students_list_view" />
     <item type="id" name="results_list_view" />
+    <item type="id" name="appointments_list_view" />
 
     <item type="id" name="add_result_button" />
 
