@@ -35,6 +35,11 @@
 
     <dialog
         android:id="@+id/navAppointmentEditDialog"
-        android:name="com.jasperanelechukwu.android.courseadvizor.ui.dialogs.AppointmentEditDialogFragment" />
+        android:name="com.jasperanelechukwu.android.courseadvizor.ui.dialogs.AppointmentEditDialogFragment">
+        <argument
+            android:name="appointmentId"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </dialog>
 
 </navigation>

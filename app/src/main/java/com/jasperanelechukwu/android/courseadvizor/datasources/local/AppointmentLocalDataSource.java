@@ -24,6 +24,14 @@ public class AppointmentLocalDataSource {
         return appointmentDao.insertAll(appointmentEntities);
     }
 
+    public Single<Integer> update(final AppointmentEntity appointment) {
+        return appointmentDao.update(appointment);
+    }
+
+    public Single<AppointmentEntity> getOne(final long id) {
+        return appointmentDao.getOne(id);
+    }
+
     public Flowable<List<AppointmentEntityAndStudentEntity>> getAll() {
         return appointmentDao.getAll();
     }

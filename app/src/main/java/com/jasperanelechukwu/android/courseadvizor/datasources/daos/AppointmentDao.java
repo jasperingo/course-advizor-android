@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Transaction;
+import androidx.room.Update;
 
 import com.jasperanelechukwu.android.courseadvizor.entities.local.AppointmentEntity;
 import com.jasperanelechukwu.android.courseadvizor.entities.local.AppointmentEntityAndStudentEntity;
@@ -22,6 +23,12 @@ public interface AppointmentDao {
 
     @Insert
     Single<List<Long>> insertAll(List<AppointmentEntity> appointments);
+
+    @Update
+    Single<Integer> update(AppointmentEntity appointment);
+
+    @Query("SELECT * FROM appointment WHERE appointment.id = :id")
+    Single<AppointmentEntity> getOne(long id);
 
     @Transaction
     @Query(QUERY_STRING)

@@ -79,5 +79,10 @@
     <item type="id" name="appointments_list_view" />
 
     <item type="id" name="add_result_button" />
+    <item type="id" name="cancel_button" />
+    <item type="id" name="done_button" />
+
+    <item type="id" name="date_picker" />
+    <item type="id" name="time_picker" />
 
 </resources>

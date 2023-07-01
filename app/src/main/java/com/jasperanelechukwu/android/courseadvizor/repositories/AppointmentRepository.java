@@ -6,6 +6,10 @@ import com.jasperanelechukwu.android.courseadvizor.entities.Appointment;
 import com.jasperanelechukwu.android.courseadvizor.entities.local.AppointmentEntity;
 import com.jasperanelechukwu.android.courseadvizor.entities.local.AppointmentEntityAndStudentEntity;
 import com.jasperanelechukwu.android.courseadvizor.entities.remote.AppointmentDto;
+import com.jasperanelechukwu.android.courseadvizor.entities.remote.UpdateAppointmentDto;
+import com.jasperanelechukwu.android.courseadvizor.entities.ui.UpdateAppointmentFormUiState;
+import com.jasperanelechukwu.android.courseadvizor.exceptions.InvalidFormException;
+import com.jasperanelechukwu.android.courseadvizor.exceptions.InvalidUpdateAppointmentException;
 import com.jasperanelechukwu.android.courseadvizor.exceptions.RemoteDataSourceException;
 import com.jasperanelechukwu.android.courseadvizor.exceptions.RepositoryException;
 
@@ -70,5 +74,42 @@ public class AppointmentRepository {
                 return Flowable.error(throwable);
             })
             .subscribeOn(Schedulers.io());
+    }
+
+    public Single<Appointment> update(final long appointmentId, final UpdateAppointmentFormUiState uiState, final long authId) {
+        final InvalidFormException.InputErrorList inputErrors = new InvalidFormException.InputErrorList();
+
+        if (uiState.getStartedAt() == null) {
+            inputErrors.addInputRequired("started_at", uiState.getStartedAt());
+        }
+
+        if (inputErrors.hasError()) {
+            return Single.error(new InvalidUpdateAppointmentException("Client validation", inputErrors));
+        }
+
+        final UpdateAppointmentDto dto = new UpdateAppointmentDto(uiState.getStatus(), uiState.getStartedAt());
+
+        return appointmentRemoteDataSource.update(appointmentId, dto, authId)
+            .subscribeOn(Schedulers.io())
+            .onErrorResumeNext(throwable -> {
+                if (throwable instanceof RemoteDataSourceException) {
+                    return Single.error(RepositoryException.from((RemoteDataSourceException) throwable));
+                }
+
+                if (throwable instanceof InvalidFormException) {
+                    final InvalidFormException formException = (InvalidFormException) throwable;
+                    return Single.error(new InvalidUpdateAppointmentException(formException.getMessage(), formException.getInputErrors()));
+                }
+
+                return Single.error(throwable);
+            })
+            .flatMap(appointmentDto -> appointmentLocalDataSource.getOne(appointmentId).flatMap(appointment -> {
+                appointment.setStatus(appointmentDto.getStatus());
+                appointment.setStartedAt(appointmentDto.getStartedAt());
+
+                return appointmentLocalDataSource.update(appointment)
+                    .ignoreElement()
+                    .andThen(Single.just(appointment.toAppointment(null)));
+            }));
     }
 }

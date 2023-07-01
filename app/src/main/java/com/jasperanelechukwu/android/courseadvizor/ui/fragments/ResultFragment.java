@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.jasperanelechukwu.android.courseadvizor.R;
 import com.jasperanelechukwu.android.courseadvizor.databinding.FragmentResultBinding;
 import com.jasperanelechukwu.android.courseadvizor.ui.adapters.StudentResultListAdapter;
+import com.jasperanelechukwu.android.courseadvizor.ui.dialogs.StudentResultEditDialogFragment;
 import com.jasperanelechukwu.android.courseadvizor.viewmodels.ResultViewModel;
 import com.jasperanelechukwu.android.courseadvizor.viewmodels.StudentResultModifyViewModel;
 
@@ -94,7 +95,7 @@ public class ResultFragment extends Fragment {
             view1 -> viewModel.fetchStudentResults(id),
             studentWithResult -> {
                 final Bundle bundle = new Bundle();
-                bundle.putLong("studentId", studentWithResult.getId());
+                bundle.putLong(StudentResultEditDialogFragment.ARG_ID_KEY, studentWithResult.getId());
                 navController.navigate(R.id.action_navResultFragment_to_navStudentResultEditDialog, bundle);
             }
         );
