@@ -39,10 +39,14 @@ public class AppointmentListAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     public void setUiState(AppointmentsUiState uiState) {
+        final boolean modified = this.uiState != null;
+
         this.uiState = uiState;
 
         if (hasExtraOneItem()) {
             notifyItemChanged(0);
+        } else if (modified) {
+            notifyItemRangeChanged(0, uiState.getAppointments().size());
         } else {
             notifyItemRemoved(0);
             notifyItemRangeInserted(0, uiState.getAppointments().size());

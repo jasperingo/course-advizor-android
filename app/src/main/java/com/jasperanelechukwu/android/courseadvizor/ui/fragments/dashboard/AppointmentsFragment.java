@@ -1,7 +1,6 @@
 package com.jasperanelechukwu.android.courseadvizor.ui.fragments.dashboard;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,8 +59,6 @@ public class AppointmentsFragment extends Fragment {
 
         viewModel.getAppointmentsUiState().observe(getViewLifecycleOwner(), resultsUiState -> {
             listAdapter.setUiState(resultsUiState);
-
-            Log.i("Appointment change", "It has changed");
 
             if (!resultsUiState.isLoaded() && !resultsUiState.isLoading() && resultsUiState.getError() == null) {
                 viewModel.fetchAppointments();
