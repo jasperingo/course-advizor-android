@@ -1,6 +1,9 @@
 package com.jasperanelechukwu.android.courseadvizor.ui.fragments;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -10,19 +13,26 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.jasperanelechukwu.android.courseadvizor.R;
 import com.jasperanelechukwu.android.courseadvizor.databinding.FragmentDashboardBinding;
+import com.jasperanelechukwu.android.courseadvizor.services.PersistentWorkFactory;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class DashboardFragment extends Fragment {
+    @Inject
+    PersistentWorkFactory persistentWorkFactory;
+
     private FragmentDashboardBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        persistentWorkFactory.createWorkers();
     }
 
     @Override

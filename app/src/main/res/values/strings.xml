@@ -59,6 +59,7 @@
     <string name="semester__format">%1$s semester</string>
     <string name="grade__format">Grade: %1$s</string>
     <string name="session__format">%1$s session</string>
+    <string name="new_appointment_requested__format">A new appointment has been requested from: %1$s</string>
 
     <string-array name="grades">
         <item>A</item>

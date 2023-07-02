@@ -76,6 +76,50 @@ public class AppointmentRepository {
             .subscribeOn(Schedulers.io());
     }
 
+    public Single<List<Appointment>> getNewAppointments(final long authId) {
+        return appointmentRemoteDataSource.getAll(authId)
+            .flatMap(appointmentDtoList -> {
+                if (appointmentDtoList.isEmpty()) {
+                    return Single.just(new ArrayList<Appointment>());
+                }
+
+                return appointmentLocalDataSource.getAll()
+                    .firstOrError()
+                    .map(entities -> {
+                        final List<Appointment> appointments = new ArrayList<>();
+
+                        for (int i = 0; i < appointmentDtoList.size(); i++) {
+                            boolean found = false;
+
+                            AppointmentDto dto = appointmentDtoList.get(i);
+
+                            for (int j = 0; j < entities.size(); j++) {
+                                AppointmentEntityAndStudentEntity entity = entities.get(j);
+
+                                if (entity.getAppointment().getId() == dto.getId()) {
+                                    found = true;
+                                    break;
+                                }
+                            }
+
+                            if (!found) {
+                                appointments.add(dto.toAppointmentEntity().toAppointment(dto.getStudent().toStudentEntity().toStudent()));
+                            }
+                        }
+
+                        return appointments;
+                    });
+            })
+            .onErrorResumeNext(throwable -> {
+                if (throwable instanceof RemoteDataSourceException) {
+                    return Single.error(RepositoryException.from((RemoteDataSourceException) throwable));
+                }
+
+                return Single.error(throwable);
+            })
+            .subscribeOn(Schedulers.io());
+    }
+
     public Single<Appointment> update(final long appointmentId, final UpdateAppointmentFormUiState uiState, final long authId) {
         final InvalidFormException.InputErrorList inputErrors = new InvalidFormException.InputErrorList();
 
