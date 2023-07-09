@@ -7,32 +7,32 @@ import androidx.core.app.NotificationCompat;
 import androidx.navigation.NavDeepLinkBuilder;
 
 import com.jasperanelechukwu.android.courseadvizor.R;
-import com.jasperanelechukwu.android.courseadvizor.entities.Appointment;
+import com.jasperanelechukwu.android.courseadvizor.entities.Report;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.qualifiers.ApplicationContext;
 
-public class AppointmentNotification extends BaseNotification {
+public class ReportNotification extends BaseNotification {
     @Inject
-    public AppointmentNotification(@ApplicationContext Context context) {
+    public ReportNotification(@ApplicationContext Context context) {
         super(context);
     }
 
-    public void send(final Appointment appointment) {
+    public void send(final Report report) {
         PendingIntent pendingIntent = new NavDeepLinkBuilder(getApplicationContext())
             .setGraph(R.navigation.dashboard_nav_graph)
-            .setDestination(R.id.navAppointmentsFragment)
+            .setDestination(R.id.navReportsFragment)
             .createPendingIntent();
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(getApplicationContext(), CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_appointments_24)
-            .setContentTitle(getApplicationContext().getString(R.string.new_appointment))
-            .setContentText(getApplicationContext().getString(R.string.new_appointment_requested__format, appointment.getStudent().getFullName()))
+            .setSmallIcon(R.drawable.ic_reports_24)
+            .setContentTitle(getApplicationContext().getString(R.string.new_report))
+            .setContentText(getApplicationContext().getString(R.string.new_report_requested__format, report.getStudent().getFullName()))
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true);
 
-       sendNotification(builder, (int) appointment.getId());
+       sendNotification(builder, (int) report.getId());
     }
 }

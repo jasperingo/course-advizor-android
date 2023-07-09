@@ -58,6 +58,9 @@
     <string name="appointment_updated">Appointment has been updated</string>
     <string name="report_updated">Report has been updated</string>
 
+    <string name="new_appointment">New appointment</string>
+    <string name="new_report">New report</string>
+
     <string name="your_reply__format">Your reply: %1$s</string>
     <string name="meeting_date__format">Meeting date: %1$s</string>
     <string name="request_date__format">Request date: %1$s</string>
@@ -66,6 +69,7 @@
     <string name="grade__format">Grade: %1$s</string>
     <string name="session__format">%1$s session</string>
     <string name="new_appointment_requested__format">A new appointment has been requested from: %1$s</string>
+    <string name="new_report_requested__format">A new report has been sent from: %1$s</string>
 
     <string-array name="grades">
         <item>A</item>

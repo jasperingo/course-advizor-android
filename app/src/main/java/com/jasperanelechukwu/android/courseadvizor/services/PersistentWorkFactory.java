@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 
+import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -20,6 +21,9 @@ public class PersistentWorkFactory {
     }
 
     public void createWorkers() {
-        workManager.enqueue(new PeriodicWorkRequest.Builder(CheckNewAppointmentWorker.class, 15, TimeUnit.MINUTES).build());
+        workManager.enqueue(Arrays.asList(
+            new PeriodicWorkRequest.Builder(CheckNewReportWorker.class, 15, TimeUnit.MINUTES).build(),
+            new PeriodicWorkRequest.Builder(CheckNewAppointmentWorker.class, 15, TimeUnit.MINUTES).build()
+        ));
     }
 }

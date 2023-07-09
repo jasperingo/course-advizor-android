@@ -76,6 +76,50 @@ public class ReportRepository {
             .subscribeOn(Schedulers.io());
     }
 
+    public Single<List<Report>> getNewReports(final long authId) {
+        return reportRemoteDataSource.getAll(authId)
+            .flatMap(reportDtoList -> {
+                if (reportDtoList.isEmpty()) {
+                    return Single.just(new ArrayList<Report>());
+                }
+
+                return reportLocalDataSource.getAll()
+                    .firstOrError()
+                    .map(entities -> {
+                        final List<Report> reports = new ArrayList<>();
+
+                        for (int i = 0; i < reportDtoList.size(); i++) {
+                            boolean found = false;
+
+                            ReportDto dto = reportDtoList.get(i);
+
+                            for (int j = 0; j < entities.size(); j++) {
+                                ReportEntityAndStudentEntity entity = entities.get(j);
+
+                                if (entity.getReport().getId() == dto.getId()) {
+                                    found = true;
+                                    break;
+                                }
+                            }
+
+                            if (!found) {
+                                reports.add(dto.toReportEntity().toReport(dto.getStudent().toStudentEntity().toStudent()));
+                            }
+                        }
+
+                        return reports;
+                    });
+            })
+            .onErrorResumeNext(throwable -> {
+                if (throwable instanceof RemoteDataSourceException) {
+                    return Single.error(RepositoryException.from((RemoteDataSourceException) throwable));
+                }
+
+                return Single.error(throwable);
+            })
+            .subscribeOn(Schedulers.io());
+    }
+
     public Single<Report> update(final long reportId, final UpdateReportFormUiState uiState, final long authId) {
         final InvalidFormException.InputErrorList inputErrors = new InvalidFormException.InputErrorList();
 
