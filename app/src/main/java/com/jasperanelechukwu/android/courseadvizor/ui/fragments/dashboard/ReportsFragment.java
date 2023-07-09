@@ -1,5 +1,7 @@
 package com.jasperanelechukwu.android.courseadvizor.ui.fragments.dashboard;
 
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +23,14 @@ import com.jasperanelechukwu.android.courseadvizor.ui.dialogs.ReportEditDialogFr
 import com.jasperanelechukwu.android.courseadvizor.viewmodels.ReportUpdateViewModel;
 import com.jasperanelechukwu.android.courseadvizor.viewmodels.ReportsViewModel;
 
+import java.io.IOException;
+
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class ReportsFragment extends Fragment {
+    private MediaPlayer mediaPlayer;
+
     private FragmentReportsBinding binding;
 
     @Override
@@ -34,7 +40,10 @@ public class ReportsFragment extends Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mediaPlayer = new MediaPlayer();
+
         binding = FragmentReportsBinding.inflate(inflater, container, false);
+
         return binding.getRoot();
     }
 
@@ -55,7 +64,21 @@ public class ReportsFragment extends Fragment {
                 bundle.putLong(ReportEditDialogFragment.ARG_ID_KEY, report.getId());
                 navController.navigate(R.id.action_navReportsFragment_to_navReportEditDialog, bundle);
             },
-            report -> Toast.makeText(requireContext(), "Play report", Toast.LENGTH_LONG).show()
+            report -> {
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.stop();
+                }
+
+                mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+
+                try {
+                    mediaPlayer.setDataSource(report.getRecordUrl());
+                    mediaPlayer.prepare();
+                    mediaPlayer.start();
+                } catch (IOException e) {
+                    Toast.makeText(requireContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
         );
 
         viewModel.getReportsUiState().observe(getViewLifecycleOwner(), resultsUiState -> {
@@ -79,5 +102,13 @@ public class ReportsFragment extends Fragment {
         binding.reportsListView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
         binding.reportsListView.setAdapter(listAdapter);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        mediaPlayer.reset();
+        mediaPlayer.release();
     }
 }
