@@ -32,6 +32,8 @@
     <string name="next">Next</string>
     <string name="done">Done</string>
     <string name="cancel">Cancel</string>
+    <string name="play">Play</string>
+    <string name="reply">Reply</string>
 
     <string name="not_set">Not set</string>
 
@@ -54,8 +56,10 @@
     <string name="student_result_modified">Student result has been modified</string>
     <string name="appointment_updated">Appointment has been updated</string>
 
+    <string name="your_reply__format">Your reply: %1$s</string>
     <string name="meeting_date__format">Meeting date: %1$s</string>
     <string name="request_date__format">Request date: %1$s</string>
+    <string name="sent_date__format">Sent on: %1$s</string>
     <string name="semester__format">%1$s semester</string>
     <string name="grade__format">Grade: %1$s</string>
     <string name="session__format">%1$s session</string>
