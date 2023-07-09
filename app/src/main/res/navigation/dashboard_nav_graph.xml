@@ -31,13 +31,26 @@
         android:id="@id/navReportsFragment"
         android:name="com.jasperanelechukwu.android.courseadvizor.ui.fragments.dashboard.ReportsFragment"
         android:label="@string/reports"
-        tools:layout="@layout/fragment_reports" />
+        tools:layout="@layout/fragment_reports" >
+        <action
+            android:id="@+id/action_navReportsFragment_to_navReportEditDialog"
+            app:destination="@id/navReportEditDialog" />
+    </fragment>
 
     <dialog
         android:id="@+id/navAppointmentEditDialog"
         android:name="com.jasperanelechukwu.android.courseadvizor.ui.dialogs.AppointmentEditDialogFragment">
         <argument
             android:name="appointmentId"
+            app:argType="long"
+            android:defaultValue="0L" />
+    </dialog>
+
+    <dialog
+        android:id="@+id/navReportEditDialog"
+        android:name="com.jasperanelechukwu.android.courseadvizor.ui.dialogs.ReportEditDialogFragment">
+        <argument
+            android:name="reportId"
             app:argType="long"
             android:defaultValue="0L" />
     </dialog>

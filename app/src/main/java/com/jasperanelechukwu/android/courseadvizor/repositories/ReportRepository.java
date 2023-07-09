@@ -6,6 +6,10 @@ import com.jasperanelechukwu.android.courseadvizor.entities.Report;
 import com.jasperanelechukwu.android.courseadvizor.entities.local.ReportEntity;
 import com.jasperanelechukwu.android.courseadvizor.entities.local.ReportEntityAndStudentEntity;
 import com.jasperanelechukwu.android.courseadvizor.entities.remote.ReportDto;
+import com.jasperanelechukwu.android.courseadvizor.entities.remote.UpdateReportDto;
+import com.jasperanelechukwu.android.courseadvizor.entities.ui.UpdateReportFormUiState;
+import com.jasperanelechukwu.android.courseadvizor.exceptions.InvalidFormException;
+import com.jasperanelechukwu.android.courseadvizor.exceptions.InvalidUpdateReportException;
 import com.jasperanelechukwu.android.courseadvizor.exceptions.RemoteDataSourceException;
 import com.jasperanelechukwu.android.courseadvizor.exceptions.RepositoryException;
 
@@ -70,5 +74,41 @@ public class ReportRepository {
                 return Flowable.error(throwable);
             })
             .subscribeOn(Schedulers.io());
+    }
+
+    public Single<Report> update(final long reportId, final UpdateReportFormUiState uiState, final long authId) {
+        final InvalidFormException.InputErrorList inputErrors = new InvalidFormException.InputErrorList();
+
+        if (uiState.getReply() == null) {
+            inputErrors.addInputRequired("reply", uiState.getReply());
+        }
+
+        if (inputErrors.hasError()) {
+            return Single.error(new InvalidUpdateReportException("Client validation", inputErrors));
+        }
+
+        final UpdateReportDto dto = new UpdateReportDto(uiState.getReply());
+
+        return reportRemoteDataSource.update(reportId, dto, authId)
+            .subscribeOn(Schedulers.io())
+            .onErrorResumeNext(throwable -> {
+                if (throwable instanceof RemoteDataSourceException) {
+                    return Single.error(RepositoryException.from((RemoteDataSourceException) throwable));
+                }
+
+                if (throwable instanceof InvalidFormException) {
+                    final InvalidFormException formException = (InvalidFormException) throwable;
+                    return Single.error(new InvalidUpdateReportException(formException.getMessage(), formException.getInputErrors()));
+                }
+
+                return Single.error(throwable);
+            })
+            .flatMap(reportDto -> reportLocalDataSource.getOne(reportId).flatMap(report -> {
+                report.setReply(reportDto.getReply());
+
+                return reportLocalDataSource.update(report)
+                    .ignoreElement()
+                    .andThen(Single.just(report.toReport(null)));
+            }));
     }
 }

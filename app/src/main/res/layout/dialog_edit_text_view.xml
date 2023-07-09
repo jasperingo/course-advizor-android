@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditText
+        android:id="@id/custom_edit_text_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_md"
+        android:autofillHints="name"
+        android:inputType="textMultiLine"
+        android:lines="4"
+        android:hint="@string/reply"
+        android:labelFor="@string/reply"
+        android:paddingHorizontal="@dimen/dimen_md"
+        android:background="@drawable/input_background"/>
+</layout>
